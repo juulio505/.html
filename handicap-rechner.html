@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Golf Handicap Rechner</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f2f4f7;
+        color: #1f2937;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 680px;
+        margin: auto;
+        padding: 18px 12px 40px;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 27px;
+    }
+
+    .subtitle {
+        margin-top: 5px;
+        margin-bottom: 20px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+        font-size: 18px;
+        margin: 0 0 14px;
+    }
+
+    .info {
+        background: #eff6ff;
+        border-left: 4px solid #3b82f6;
+        padding: 12px;
+        border-radius: 6px;
+        line-height: 1.45;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .entry-counter {
+        font-weight: bold;
+        font-size: 14px;
+        color: #2563eb;
+        margin-bottom: 8px;
+    }
+
+    .input-row {
+        display: flex;
+        gap: 8px;
+        align-items: end;
+    }
+
+    .input-group {
+        width: 110px;
+    }
+
+    .input-group.score-group {
+        width: 125px;
+    }
+
+    label {
+        display: block;
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 4px;
+    }
+
+    input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        padding: 0 9px;
+        font-size: 16px;
+        background: white;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    .confirm-button {
+        height: 40px;
+        margin: 0;
+        flex: 1;
+    }
+
+    button {
+        border: 0;
+        border-radius: 7px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0 14px;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        font-size: 12px;
+        color: #64748b;
+        padding: 7px 5px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    td {
+        padding: 5px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    td input {
+        height: 34px;
+        font-size: 15px;
+        padding: 0 7px;
+    }
+
+    .position-cell {
+        width: 85px;
+    }
+
+    .score-cell {
+        width: 105px;
+    }
+
+    .delete-cell {
+        width: 40px;
+        text-align: right;
+    }
+
+    .delete-btn {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        background: #e5e7eb;
+        color: #475569;
+        font-size: 16px;
+    }
+
+    .delete-btn:hover {
+        background: #cbd5e1;
+    }
+
+    .top8 {
+        background: #ecfdf5;
+    }
+
+    .special {
+        background: #fff7ed;
+        border: 2px solid #f59e0b;
+    }
+
+    .special td {
+        border-bottom-color: #fed7aa;
+    }
+
+    .warning {
+        background: #fff7ed;
+        border: 1px solid #fdba74;
+        padding: 14px;
+        border-radius: 8px;
+        line-height: 1.45;
+        font-size: 14px;
+    }
+
+    .search-value {
+        font-size: 23px;
+        font-weight: bold;
+        margin: 7px 0;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .full-button {
+        width: 100%;
+        height: 42px;
+        margin-top: 12px;
+    }
+
+    .result-box {
+        text-align: center;
+        background: #ecfdf5;
+        border: 1px solid #86efac;
+        border-radius: 9px;
+        padding: 17px;
+        margin-top: 14px;
+    }
+
+    .result-label {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .result-value {
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+
+    .small {
+        color: #64748b;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .new-result-input {
+        max-width: 140px;
+    }
+
+    @media (max-width: 450px) {
+
+        .container {
+            padding-left: 9px;
+            padding-right: 9px;
+        }
+
+        .card {
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .input-row {
+            gap: 6px;
+        }
+
+        .input-group {
+            width: 82px;
+        }
+
+        .input-group.score-group {
+            width: 95px;
+        }
+
+        .confirm-button {
+            padding: 0 8px;
+            font-size: 13px;
+        }
+
+        .position-cell {
+            width: 72px;
+        }
+
+        .score-cell {
+            width: 92px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Golf Handicap Rechner</h1>
+
+    <div class="subtitle">
+        Beste 8 aus den letzten 20 Ergebnissen
+    </div>
+
+
+    <!-- EINGABE DER BESTEN 8 -->
+
+    <div class="card">
+
+        <h2>Bisherige beste 8</h2>
+
+        <div class="info">
+            Gib jeweils Position und Score eines der aktuellen
+            besten 8 Ergebnisse ein.
+        </div>
+
+        <div id="entryCounter" class="entry-counter">
+            Eingabe Nr. 1 von 8
+        </div>
+
+        <div class="input-row">
+
+            <div class="input-group">
+
+                <label for="positionInput">
+                    Position
+                </label>
+
+                <input
+                    id="positionInput"
+                    type="number"
+                    min="1"
+                    max="20"
+                    inputmode="numeric"
+                    placeholder="1–20"
+                >
+
+            </div>
+
+
+            <div class="input-group score-group">
+
+                <label for="scoreInput">
+                    Score
+                </label>
+
+                <input
+                    id="scoreInput"
+                    type="number"
+                    step="0.1"
+                    inputmode="decimal"
+                    placeholder="z. B. 8,7"
+                >
+
+            </div>
+
+
+            <button
+                class="confirm-button"
+                onclick="addEntry()"
+            >
+                Bestätigen
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABELLE -->
+
+    <div class="card">
+
+        <h2>Ergebnisse</h2>
+
+        <div id="tableContainer">
+
+            <div class="small">
+                Noch keine Ergebnisse eingegeben.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NEUES ERGEBNIS -->
+
+    <div id="newResultCard" class="card hidden">
+
+        <h2>Neues Turnierergebnis</h2>
+
+        <label for="newScore">
+            Neuer Score
+        </label>
+
+        <input
+            id="newScore"
+            class="new-result-input"
+            type="number"
+            step="0.1"
+            inputmode="decimal"
+            placeholder="z. B. 7,4"
+        >
+
+        <button
+            class="full-button"
+            onclick="calculateHandicap()"
+        >
+            Neues Handicap berechnen
+        </button>
+
+    </div>
+
+
+    <!-- 9. ERGEBNIS -->
+
+    <div id="ninthCard" class="card hidden">
+
+        <h2>9. Ergebnis benötigt</h2>
+
+        <div class="warning">
+
+            Das bisherige Ergebnis auf Position 20 gehört zu
+            den aktuellen besten 8 und fällt heraus.
+
+            <br><br>
+
+            Suche deshalb unter deinen übrigen Ergebnissen nach
+            dem bisherigen <strong>9. besten Ergebnis</strong>.
+
+            <br><br>
+
+            Der gesuchte Score muss mindestens sein:
+
+            <div
+                id="searchValue"
+                class="search-value"
+            >
+                ≥ 0,0
+            </div>
+
+            <div class="small">
+                Suche also nach einem Ergebnis mit diesem Wert
+                oder einem höheren Wert.
+            </div>
+
+        </div>
+
+
+        <label for="ninthScore">
+            Bisheriges 9. bestes Ergebnis
+        </label>
+
+        <input
+            id="ninthScore"
+            class="new-result-input"
+            type="number"
+            step="0.1"
+            inputmode="decimal"
+            placeholder="z. B. 9,2"
+            oninput="calculateFinal()"
+        >
+
+    </div>
+
+
+    <!-- ERGEBNIS -->
+
+    <div id="resultCard" class="card hidden">
+
+        <h2>Neues Handicap</h2>
+
+        <div id="calculationInfo"></div>
+
+        <div class="result-box">
+
+            <div class="result-label">
+                Neuer Durchschnitt der besten 8
+            </div>
+
+            <div
+                id="newHandicap"
+                class="result-value"
+            >
+                0,0
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let entries = [];
+
+let entryNumber = 1;
+
+
+/* =====================================================
+   BESTE 8 EINGEBEN
+===================================================== */
+
+function addEntry() {
+
+    const positionInput =
+        document.getElementById("positionInput");
+
+    const scoreInput =
+        document.getElementById("scoreInput");
+
+
+    const position =
+        parseInt(positionInput.value);
+
+    const score =
+        parseFloat(scoreInput.value);
+
+
+    if (
+        isNaN(position) ||
+        position < 1 ||
+        position > 20
+    ) {
+        alert("Bitte eine Position zwischen 1 und 20 eingeben.");
+        return;
+    }
+
+
+    if (isNaN(score)) {
+        alert("Bitte einen Score eingeben.");
+        return;
+    }
+
+
+    if (
+        entries.some(entry =>
+            entry.position === position
+        )
+    ) {
+        alert("Diese Position wurde bereits eingegeben.");
+        return;
+    }
+
+
+    entries.push({
+        position: position,
+        score: score
+    });
+
+
+    renderTable();
+
+
+    positionInput.value = "";
+    scoreInput.value = "";
+
+
+    entryNumber++;
+
+
+    if (entries.length < 8) {
+
+        document.getElementById("entryCounter").textContent =
+            "Eingabe Nr. " + entryNumber + " von 8";
+
+        positionInput.focus();
+
+    } else {
+
+        document.getElementById("entryCounter").textContent =
+            "Alle 8 Ergebnisse eingegeben";
+
+        document.getElementById("newResultCard")
+            .classList.remove("hidden");
+
+        document.getElementById("newScore").focus();
+    }
+}
+
+
+/* =====================================================
+   TABELLE
+===================================================== */
+
+function renderTable() {
+
+    if (entries.length === 0) {
+
+        document.getElementById("tableContainer").innerHTML =
+            '<div class="small">Noch keine Ergebnisse eingegeben.</div>';
+
+        return;
+    }
+
+
+    const sorted =
+        [...entries].sort((a,b) =>
+            a.position - b.position
+        );
+
+
+    let html = `
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Position</th>
+                    <th>Score</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+    `;
+
+
+    sorted.forEach(entry => {
+
+        html += `
+
+            <tr>
+
+                <td class="position-cell">
+
+                    <input
+                        type="number"
+                        min="1"
+                        max="20"
+                        value="${entry.position}"
+                        onchange="
+                            updatePosition(
+                                ${entry.position},
+                                this.value
+                            )
+                        "
+                    >
+
+                </td>
+
+
+                <td class="score-cell">
+
+                    <input
+                        type="number"
+                        step="0.1"
+                        value="${formatInputScore(entry.score)}"
+                        onchange="
+                            updateScore(
+                                ${entry.position},
+                                this.value
+                            )
+                        "
+                    >
+
+                </td>
+
+
+                <td class="delete-cell">
+
+                    <button
+                        class="delete-btn"
+                        onclick="
+                            deleteEntry(${entry.position})
+                        "
+                    >
+                        ×
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+    });
+
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+
+    document.getElementById("tableContainer").innerHTML =
+        html;
+}
+
+
+/* =====================================================
+   TABELLE BEARBEITEN
+===================================================== */
+
+function updatePosition(oldPosition, newValue) {
+
+    const newPosition =
+        parseInt(newValue);
+
+
+    if (
+        isNaN(newPosition) ||
+        newPosition < 1 ||
+        newPosition > 20
+    ) {
+        renderTable();
+        return;
+    }
+
+
+    if (
+        entries.some(entry =>
+            entry.position === newPosition &&
+            entry.position !== oldPosition
+        )
+    ) {
+        alert("Diese Position wird bereits verwendet.");
+        renderTable();
+        return;
+    }
+
+
+    const entry =
+        entries.find(entry =>
+            entry.position === oldPosition
+        );
+
+
+    if (entry) {
+        entry.position = newPosition;
+    }
+
+
+    renderTable();
+}
+
+
+function updateScore(position, newValue) {
+
+    const score =
+        parseFloat(newValue);
+
+
+    if (isNaN(score)) {
+        renderTable();
+        return;
+    }
+
+
+    const entry =
+        entries.find(entry =>
+            entry.position === position
+        );
+
+
+    if (entry) {
+        entry.score = score;
+    }
+
+
+    renderTable();
+}
+
+
+function deleteEntry(position) {
+
+    entries =
+        entries.filter(entry =>
+            entry.position !== position
+        );
+
+
+    entryNumber =
+        entries.length + 1;
+
+
+    document.getElementById("entryCounter").textContent =
+        "Eingabe Nr. " + entryNumber + " von 8";
+
+
+    document.getElementById("newResultCard")
+        .classList.toggle(
+            "hidden",
+            entries.length < 8
+        );
+
+
+    document.getElementById("ninthCard")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultCard")
+        .classList.add("hidden");
+
+
+    renderTable();
+}
+
+
+/* =====================================================
+   HAUPTBERECHNUNG
+===================================================== */
+
+function calculateHandicap() {
+
+    if (entries.length !== 8) {
+
+        alert(
+            "Bitte zuerst alle 8 besten Ergebnisse eingeben."
+        );
+
+        return;
+    }
+
+
+    const newScore =
+        parseFloat(
+            document.getElementById("newScore").value
+        );
+
+
+    if (isNaN(newScore)) {
+
+        alert(
+            "Bitte das neue Turnierergebnis eingeben."
+        );
+
+        return;
+    }
+
+
+    /*
+       Prüfen, ob das alte Ergebnis Nr. 20
+       zu den besten 8 gehört.
+    */
+
+    const droppedEntry =
+        entries.find(entry =>
+            entry.position === 20
+        );
+
+
+    /* -----------------------------------------------
+       FALL 1
+       Nr. 20 gehört NICHT zu den besten 8
+    ------------------------------------------------ */
+
+    if (!droppedEntry) {
+
+        document.getElementById("ninthCard")
+            .classList.add("hidden");
+
+
+        const scores =
+            entries.map(entry =>
+                entry.score
+            );
+
+
+        const worst =
+            Math.max(...scores);
+
+
+        let newTop8;
+
+
+        if (newScore < worst) {
+
+            /*
+               Nur ein konkretes schlechtestes
+               Ergebnis wird ersetzt.
+            */
+
+            let replaced = false;
+
+            newTop8 =
+                scores.filter(score => {
+
+                    if (
+                        !replaced &&
+                        score === worst
+                    ) {
+                        replaced = true;
+                        return false;
+                    }
+
+                    return true;
+                });
+
+
+            newTop8.push(newScore);
+
+        } else {
+
+            newTop8 =
+                [...scores];
+        }
+
+
+        calculateResult(newTop8);
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       FALL 2
+       Nr. 20 gehört zu den besten 8
+    ------------------------------------------------ */
+
+    const worst =
+        Math.max(
+            ...entries.map(entry =>
+                entry.score
+            )
+        );
+
+
+    document.getElementById("searchValue").textContent =
+        "≥ " + formatDisplay(worst);
+
+
+    document.getElementById("ninthCard")
+        .classList.remove("hidden");
+
+
+    document.getElementById("resultCard")
+        .classList.add("hidden");
+
+
+    calculateFinal();
+}
+
+
+/* =====================================================
+   BERECHNUNG MIT 9. ERGEBNIS
+===================================================== */
+
+function calculateFinal() {
+
+    const newScore =
+        parseFloat(
+            document.getElementById("newScore").value
+        );
+
+
+    const ninthScore =
+        parseFloat(
+            document.getElementById("ninthScore").value
+        );
+
+
+    if (
+        isNaN(newScore) ||
+        isNaN(ninthScore)
+    ) {
+        return;
+    }
+
+
+    /*
+       Nr. 20 fällt heraus.
+    */
+
+    const remaining =
+        entries
+            .filter(entry =>
+                entry.position !== 20
+            )
+            .map(entry =>
+                entry.score
+            );
+
+
+    /*
+       Das bessere Ergebnis von neuem Ergebnis
+       und bisherigem 9. Ergebnis kommt hinzu.
+    */
+
+    const replacement =
+        Math.min(
+            newScore,
+            ninthScore
+        );
+
+
+    remaining.push(replacement);
+
+
+    calculateResult(remaining);
+}
+
+
+/* =====================================================
+   ERGEBNIS
+===================================================== */
+
+function calculateResult(scores) {
+
+    /*
+       Interne Berechnung erfolgt mit den
+       vollständigen Zahlen.
+
+       Erst die Ausgabe wird auf eine
+       Nachkommastelle gerundet.
+    */
+
+    const sorted =
+        [...scores].sort(
+            (a,b) => a - b
+        );
+
+
+    const top8 =
+        sorted.slice(0,8);
+
+
+    const average =
+        top8.reduce(
+            (sum, score) =>
+                sum + score,
+            0
+        ) / 8;
+
+
+    document.getElementById("calculationInfo").innerHTML = `
+
+        <div class="info">
+
+            <strong>Neue beste 8:</strong><br><br>
+
+            ${top8
+                .map(score =>
+                    formatDisplay(score)
+                )
+                .join(" &nbsp; | &nbsp; ")}
+
+        </div>
+
+    `;
+
+
+    document.getElementById("newHandicap").textContent =
+        formatDisplay(average);
+
+
+    document.getElementById("resultCard")
+        .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   FORMATIERUNG
+===================================================== */
+
+function formatDisplay(number) {
+
+    return number.toLocaleString(
+        "de-DE",
+        {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
+        }
+    );
+}
+
+
+function formatInputScore(number) {
+
+    return number.toFixed(1);
+}
+
+
+/* =====================================================
+   ENTER-TASTE
+===================================================== */
+
+document.getElementById("positionInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                document.getElementById("scoreInput").focus();
+            }
+
+        }
+    );
+
+
+document.getElementById("scoreInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+                addEntry();
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
