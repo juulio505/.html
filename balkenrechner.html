@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balkenberechnung</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 30px;
+        background: #f3f3f3;
+        color: #222;
+    }
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    h1 { margin-top: 0; }
+    h2 { margin-top: 28px; }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+        gap: 18px 28px;
+    }
+    .section {
+        padding: 16px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+    .input-group {
+        margin: 10px 0;
+    }
+    label {
+        display: inline-block;
+        width: 190px;
+    }
+    input, select {
+        width: 130px;
+        padding: 7px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+    .wide {
+        width: 180px;
+    }
+    button {
+        margin-top: 14px;
+        padding: 10px 18px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .results {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    .result-card {
+        background: #f0f0f0;
+        border-radius: 9px;
+        padding: 14px;
+    }
+    .result-card .label {
+        font-size: 13px;
+        color: #555;
+    }
+    .result-card .value {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 4px;
+    }
+    .geometry {
+        margin-top: 14px;
+        font-family: monospace;
+        color: #444;
+    }
+    svg {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 8px;
+    }
+    .note {
+        font-size: 13px;
+        color: #555;
+        margin-top: 10px;
+    }
+    .hidden { display: none; }
+    @media (max-width: 800px) {
+        .grid, .results { grid-template-columns: 1fr; }
+        label { width: 150px; }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Balkenberechnung</h1>
+
+    <div class="grid">
+        <div class="section">
+            <h2>Belastungsfall</h2>
+
+            <div class="input-group">
+                <label for="loadCase">System</label>
+                <select id="loadCase" class="wide">
+                    <option value="cantilever">Kragarm, Endlast</option>
+                    <option value="simplySupported">Balken, mittige Last</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="force">Kraft F [N]</label>
+                <input id="force" type="number" value="850" step="any">
+            </div>
+
+            <div class="input-group">
+                <label for="length">Länge L [mm]</label>
+                <input id="length" type="number" value="450" step="any">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Material</h2>
+
+            <div class="input-group">
+                <label for="material">Werkstoff</label>
+                <select id="material" class="wide">
+                    <option value="steel">Stahl</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>E-Modul [GPa]</label>
+                <input id="youngDisplay" type="text" value="210" disabled>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Rechteckquerschnitt</h2>
+
+            <div class="input-group">
+                <label for="width">Breite b [mm]</label>
+                <input id="width" type="number" value="50" step="any">
+            </div>
+
+            <div class="input-group">
+                <label for="height">Höhe h [mm]</label>
+                <input id="height" type="number" value="50" step="any">
+            </div>
+
+            <div class="geometry" id="geometryOutput"></div>
+        </div>
+
+        <div class="section">
+            <h2>Berechnung</h2>
+            <div class="input-group">
+                <label>Berücksichtigung</label>
+                <span>Eigengwicht des Balkens wird nicht berücksichtigt.</span>
+            </div>
+            <button id="calculate">Berechnen</button>
+            <div class="note">
+                Annahmen: linear-elastische Euler-Bernoulli-Balkentheorie, kleine Verformungen,
+                homogene Werkstoffe, Punktlast entsprechend gewähltem System.
+            </div>
+        </div>
+    </div>
+
+    <div class="results">
+        <div class="result-card">
+            <div class="label">Maximales Biegemoment</div>
+            <div class="value" id="momentResult">0 Nm</div>
+        </div>
+        <div class="result-card">
+            <div class="label">Durchbiegung max.</div>
+            <div class="value" id="deflectionResult">0 mm</div>
+        </div>
+        <div class="result-card">
+            <div class="label">Biegespannung max.</div>
+            <div class="value" id="stressResult">0 MPa</div>
+        </div>
+        <div class="result-card">
+            <div class="label">Werkstoff</div>
+            <div class="value" id="materialResult">Stahl</div>
+        </div>
+    </div>
+
+    <div class="results">
+        <div class="result-card">
+            <div class="label">Flächenträgheitsmoment I</div>
+            <div class="value" id="iResult">0 mm⁴</div>
+        </div>
+        <div class="result-card">
+            <div class="label">Widerstandsmoment W</div>
+            <div class="value" id="wResult">0 mm³</div>
+        </div>
+        <div class="result-card">
+            <div class="label">Masse pro Meter</div>
+            <div class="value" id="massResult">0 kg/m</div>
+        </div>
+        <div class="result-card">
+            <div class="label">E-Modul</div>
+            <div class="value" id="eResult">210 GPa</div>
+        </div>
+    </div>
+
+    <svg id="diagram" viewBox="0 0 900 300" aria-label="Schematische Darstellung des Balkens"></svg>
+</div>
+
+<script>
+const materials = {
+    steel: {
+        name: "Stahl",
+        E: 210000,       // N/mm²
+        density: 7850    // kg/m³
+    },
+    aluminium: {
+        name: "Aluminium",
+        E: 70000,        // N/mm²
+        density: 2700    // kg/m³
+    }
+};
+
+function readInputs() {
+    return {
+        loadCase: document.getElementById("loadCase").value,
+        F: Number(document.getElementById("force").value),
+        L: Number(document.getElementById("length").value),
+        b: Number(document.getElementById("width").value),
+        h: Number(document.getElementById("height").value),
+        material: document.getElementById("material").value
+    };
+}
+
+function calculateSection(b, h) {
+    const A = b * h;
+    const I = b * Math.pow(h, 3) / 12;
+    const W = b * Math.pow(h, 2) / 6;
+    return { A, I, W };
+}
+
+function calculateSystem(data, section, material) {
+    const F = data.F;
+    const L = data.L;
+    let Mmax;
+    let deflection;
+
+    if (data.loadCase === "cantilever") {
+        Mmax = F * L;                       // Nmm
+        deflection = F * Math.pow(L, 3) / (3 * material.E * section.I);
+    } else {
+        Mmax = F * L / 4;                   // Nmm
+        deflection = F * Math.pow(L, 3) / (48 * material.E * section.I);
+    }
+
+    const stress = Mmax / section.W;        // N/mm² = MPa
+    const massPerMeter = section.A * 1e-6 * material.density;
+
+    return { Mmax, deflection, stress, massPerMeter };
+}
+
+function format(value, digits = 2) {
+    return value.toLocaleString("de-DE", {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+    });
+}
+
+function updateMaterialDisplay() {
+    const material = materials[document.getElementById("material").value];
+    document.getElementById("youngDisplay").value = (material.E / 1000).toLocaleString("de-DE");
+}
+
+function drawDiagram(data) {
+    const svg = document.getElementById("diagram");
+    const W = 900;
+    const H = 300;
+    const left = 120;
+    const right = 760;
+    const beamY = 145;
+
+    const beamStart = left;
+    const beamEnd = right;
+
+    let html = "";
+
+    html += `<line x1="0" y1="0" x2="${W}" y2="0" stroke="#fff"/>`;
+
+    if (data.loadCase === "cantilever") {
+        html += `
+            <line x1="${beamStart}" y1="105" x2="${beamStart}" y2="185" stroke="#222" stroke-width="7"/>
+            <line x1="${beamStart - 22}" y1="105" x2="${beamStart}" y2="120" stroke="#555" stroke-width="2"/>
+            <line x1="${beamStart - 22}" y1="120" x2="${beamStart}" y2="135" stroke="#555" stroke-width="2"/>
+            <line x1="${beamStart - 22}" y1="135" x2="${beamStart}" y2="150" stroke="#555" stroke-width="2"/>
+            <line x1="${beamStart - 22}" y1="150" x2="${beamStart}" y2="165" stroke="#555" stroke-width="2"/>
+            <line x1="${beamStart - 22}" y1="165" x2="${beamStart}" y2="180" stroke="#555" stroke-width="2"/>
+            <rect x="${beamStart}" y="${beamY - 10}" width="${beamEnd - beamStart}" height="20" fill="#888"/>
+            <line x1="${beamEnd}" y1="50" x2="${beamEnd}" y2="${beamY - 10}" stroke="#1f4e79" stroke-width="4"/>
+            <polygon points="${beamEnd - 9},${beamY - 25} ${beamEnd + 9},${beamY - 25} ${beamEnd},${beamY - 7}" fill="#1f4e79"/>
+            <text x="${beamEnd + 15}" y="65" font-size="18" fill="#1f4e79">${format(data.F, 0)} N</text>
+            <text x="420" y="210" font-size="18" text-anchor="middle">${format(data.L, 0)} mm</text>
+        `;
+    } else {
+        html += `
+            <rect x="${beamStart}" y="${beamY - 10}" width="${beamEnd - beamStart}" height="20" fill="#888"/>
+            <polygon points="${beamStart},${beamY + 11} ${beamStart - 18},${beamY + 45} ${beamStart + 18},${beamY + 45}" fill="#666"/>
+            <line x1="${beamStart - 26}" y1="${beamY + 45}" x2="${beamStart + 26}" y2="${beamY + 45}" stroke="#222" stroke-width="3"/>
+            <circle cx="${beamEnd}" cy="${beamY + 30}" r="18" fill="none" stroke="#666" stroke-width="3"/>
+            <line x1="${beamEnd - 27}" y1="${beamY + 45}" x2="${beamEnd + 27}" y2="${beamY + 45}" stroke="#222" stroke-width="3"/>
+
+            <line x1="${(beamStart + beamEnd)/2}" y1="50" x2="${(beamStart + beamEnd)/2}" y2="${beamY - 10}" stroke="#1f4e79" stroke-width="4"/>
+            <polygon points="${(beamStart + beamEnd)/2 - 9},${beamY - 25} ${(beamStart + beamEnd)/2 + 9},${beamY - 25} ${(beamStart + beamEnd)/2},${beamY - 7}" fill="#1f4e79"/>
+            <text x="${(beamStart + beamEnd)/2 + 15}" y="65" font-size="18" fill="#1f4e79">${format(data.F, 0)} N</text>
+            <text x="440" y="210" font-size="18" text-anchor="middle">${format(data.L, 0)} mm</text>
+        `;
+    }
+
+    html += `<text x="450" y="260" font-size="16" text-anchor="middle" fill="#555">
+        ${data.loadCase === "cantilever" ? "Kragarm mit Endlast" : "Balken mit zwei Auflagern und mittiger Last"}
+    </text>`;
+
+    svg.innerHTML = html;
+}
+
+function update() {
+    const data = readInputs();
+
+    if ([data.F, data.L, data.b, data.h].some(v => !Number.isFinite(v) || v <= 0)) {
+        alert("Bitte alle Eingaben als positive Zahlen eingeben.");
+        return;
+    }
+
+    const material = materials[data.material];
+    const section = calculateSection(data.b, data.h);
+    const result = calculateSystem(data, section, material);
+
+    // Eingabewerte nach der Berechnung unverändert beibehalten
+    document.getElementById("length").value = data.L;
+    document.getElementById("force").value = data.F;
+    document.getElementById("width").value = data.b;
+    document.getElementById("height").value = data.h;
+
+    document.getElementById("momentResult").textContent =
+        `${format(result.Mmax / 1000, 2)} Nm`;
+
+    document.getElementById("deflectionResult").textContent =
+        `${format(result.deflection, 3)} mm`;
+
+    document.getElementById("stressResult").textContent =
+        `${format(result.stress, 2)} MPa`;
+
+    document.getElementById("materialResult").textContent =
+        material.name;
+
+    document.getElementById("iResult").textContent =
+        `${format(section.I, 1)} mm⁴`;
+
+    document.getElementById("wResult").textContent =
+        `${format(section.W, 1)} mm³`;
+
+    document.getElementById("massResult").textContent =
+        `${format(result.massPerMeter, 3)} kg/m`;
+
+    document.getElementById("eResult").textContent =
+        `${format(material.E / 1000, 0)} GPa`;
+
+    document.getElementById("geometryOutput").textContent =
+        `A = ${format(section.A, 1)} mm²`;
+
+    drawDiagram(data);
+    updateMaterialDisplay();
+}
+
+document.getElementById("calculate").addEventListener("click", update);
+document.getElementById("material").addEventListener("change", updateMaterialDisplay);
+
+update();
+</script>
+</body>
+</html>
