@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ortung</title>
+    <title>Standortermittlung</title>
 
     <style>
         * {
@@ -171,8 +171,6 @@
             margin-top: 28px;
         }
 
-        /* Roter Abbruchknopf */
-
         .cancel-button {
             border: 1px solid #b52b2b;
             background: #c93636;
@@ -236,8 +234,6 @@
             text-align: center;
         }
 
-        /* Grüner Haken */
-
         .success-icon {
             width: 54px;
             height: 54px;
@@ -265,8 +261,6 @@
             font-size: 14px;
             line-height: 1.6;
         }
-
-        /* Übermittelte Daten */
 
         .transmitted-data {
             margin: 38px auto 0;
@@ -317,6 +311,13 @@
             color: #858d94;
         }
 
+        .test-notice {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 11px;
+            color: #9aa1a7;
+        }
+
         .footer {
             margin-top: 20px;
             text-align: center;
@@ -360,11 +361,11 @@
     <div class="topbar">
 
         <div class="topbar-title">
-            Ortung
+            Standortermittlung
         </div>
 
         <div class="topbar-right">
-            Standortermittlung · Systemstatus: aktiv
+            Verbindungsstatus · aktiv
         </div>
 
     </div>
@@ -401,9 +402,10 @@
 
                         <div class="notice-text">
 
-                            <strong>Lasse Stallmeister</strong>, ihre Position wurde
-                            über das Mobilfunknetz erfasst und wird in Kürze an die
-                            Polizei weitergeleitet.
+                            Die IP-Adresse
+                            <strong>185.214.72.41</strong>
+                            wurde erfasst. Die zugehörigen Standortdaten werden
+                            in Kürze an die zuständige Leitstelle weitergeleitet.
 
                         </div>
 
@@ -420,11 +422,11 @@
                         <div class="location-row">
 
                             <div class="location-label">
-                                Ort
+                                Land
                             </div>
 
                             <div class="location-value">
-                                Hörste
+                                Deutschland
                             </div>
 
                         </div>
@@ -550,7 +552,7 @@
 
                     <div class="success-text">
 
-                        Standort an Polizeileitstelle 2263 Lippstadt
+                        Standort an die Zentrale Standortstelle 272 Düsseldorf
                         zur Personenortung über Mobilfunknetz weitergeleitet.
 
                     </div>
@@ -572,11 +574,11 @@
                         <div class="data-row">
 
                             <div class="data-label">
-                                Betroffene Person
+                                IP-Adresse
                             </div>
 
                             <div class="data-value">
-                                Lasse Stallmeister
+                                185.214.72.41
                             </div>
 
                         </div>
@@ -585,11 +587,11 @@
                         <div class="data-row">
 
                             <div class="data-label">
-                                Standort
+                                Land
                             </div>
 
                             <div class="data-value">
-                                Hörste
+                                Deutschland
                             </div>
 
                         </div>
@@ -641,7 +643,7 @@
                             </div>
 
                             <div class="data-value">
-                                Polizeileitstelle 2263 Lippstadt
+                                Zentrale Standortstelle 272 Düsseldorf
                             </div>
 
                         </div>
@@ -655,13 +657,19 @@
                     Vorgang abgeschlossen · Status 200
                 </div>
 
+
+                <div class="test-notice">
+                    Fiktive Demonstrationsanwendung · Keine tatsächliche
+                    Standortermittlung oder Datenübermittlung
+                </div>
+
             </div>
 
         </div>
 
 
         <div class="footer">
-            Ortungssystem · Automatisierte Standortermittlung
+            Standortermittlung · Automatisierte Positionsabfrage
         </div>
 
     </main>
@@ -669,10 +677,7 @@
 
     <script>
 
-        /*
-         * Countdown
-         * 5 Sekunden
-         */
+        /* Countdown: 5 Sekunden */
 
         let time = 5;
 
@@ -694,11 +699,8 @@
             time--;
 
             if (time > 0) {
-
                 timer.textContent = time;
-
             }
-
 
             if (time <= 0) {
 
@@ -713,10 +715,7 @@
         }, 1000);
 
 
-        /*
-         * Übermittlung
-         * 3 Sekunden
-         */
+        /* Übermittlung: 3 Sekunden */
 
         function startLoading() {
 
@@ -736,9 +735,7 @@
         }
 
 
-        /*
-         * Abbruchknopf macht absichtlich nichts
-         */
+        /* Abbruchknopf macht absichtlich nichts */
 
         function fakeCancel() {
 
