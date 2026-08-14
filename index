@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Meine HTML-Programme</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            color: #222;
+            background-color: #f2f4f7;
+        }
+
+        main {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+        }
+
+        .beschreibung {
+            margin: 0 0 30px;
+            color: #555;
+        }
+
+        .programm-liste {
+            display: grid;
+            gap: 15px;
+        }
+
+        .programm {
+            display: block;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            background-color: #245a87;
+            border-radius: 8px;
+        }
+
+        .programm:hover {
+            background-color: #173d5e;
+        }
+
+        .programm strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 19px;
+        }
+
+        .programm span {
+            color: #e2edf5;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Meine HTML-Programme</h1>
+
+        <p class="beschreibung">
+            Wählen Sie ein Programm aus.
+        </p>
+
+        <div class="programm-liste">
+//================================================================
+            <a class="programm" href="./balkenrechner.html">
+                <strong>Balkenrechner</strong>
+                <span>Balkenrechner im Browser öffnen</span>
+            </a>
+//================================================================
+        </div>
+    </main>
+</body>
+</html>
