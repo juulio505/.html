@@ -8,56 +8,67 @@
 
 <style>
 
+/* =====================================================
+   GRUNDLAYOUT
+===================================================== */
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: #f1f2f4;
+    background: #eef0f2;
     color: #20242a;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
-    width: 100%;
-    max-width: 470px;
-    margin: auto;
-    padding: 9px 7px 25px;
-}
-
-h1 {
-    margin: 0;
-    font-size: 20px;
-    line-height: 1.1;
-}
-
-.subtitle {
-    margin-top: 3px;
-    margin-bottom: 8px;
-    color: #70767d;
-    font-size: 9px;
+    width: calc(100% - 12px);
+    max-width: 260px;
+    margin: 0 auto;
+    padding: 10px 0 24px;
 }
 
 
 /* =====================================================
-   ALLGEMEINE BEREICHE
+   KOPF
+===================================================== */
+
+h1 {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.15;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 4px;
+    margin-bottom: 11px;
+    color: #70767d;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   BEREICHE
 ===================================================== */
 
 .section {
-    margin-bottom: 6px;
+    margin-bottom: 9px;
 }
 
 .section-title {
     margin: 0 0 4px 2px;
-    color: #656b72;
-    font-size: 9px;
+    color: #62686f;
+    font-size: 12px;
     font-weight: 700;
 }
 
 
 /* =====================================================
-   AUSWAHL
+   BUTTON-GRUPPEN
 ===================================================== */
 
 .tabs {
@@ -65,9 +76,13 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 3px;
     padding: 3px;
+
+    width: 100%;
+
     background: #ffffff;
-    border: 1px solid #d4d8dc;
-    border-radius: 7px;
+
+    border: 1px solid #d0d4d8;
+    border-radius: 8px;
 }
 
 .tabs.two {
@@ -75,13 +90,20 @@ h1 {
 }
 
 .tabs button {
-    height: 29px;
+    width: 100%;
+    height: 35px;
+
     border: 0;
-    border-radius: 5px;
+    border-radius: 6px;
+
     background: transparent;
-    color: #70767d;
-    font-size: 10px;
+
+    color: #6d737a;
+
+    font-family: inherit;
+    font-size: 12px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
@@ -98,59 +120,110 @@ h1 {
 .inputs {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 7px;
 }
 
 .input-box {
-    padding: 7px;
+    width: 100%;
+    padding: 9px 10px;
+
     background: #ffffff;
-    border: 1px solid #d1d5d9;
-    border-radius: 7px;
+
+    border: 1px solid #d0d4d8;
+    border-radius: 8px;
 }
 
 .input-box-header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 7px;
-    margin-bottom: 4px;
+
+    gap: 6px;
+    margin-bottom: 7px;
 }
 
 .input-title {
-    color: #42484f;
-    font-size: 10px;
+    color: #363b41;
+    font-size: 13px;
     font-weight: 700;
 }
 
 .input-comment {
-    color: #8a9096;
-    font-size: 7px;
+    color: #858b91;
+    font-size: 11px;
+    line-height: 1.2;
     text-align: right;
 }
 
+
+/* =====================================================
+   EINGABEZEILEN
+===================================================== */
+
 .input-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 68px;
-    gap: 4px;
+
+    grid-template-columns:
+        minmax(0, 1fr) 64px;
+
+    gap: 5px;
+
+    width: 100%;
 }
+
+
+/* =====================================================
+   EINGABEFELDER
+===================================================== */
 
 input,
 select {
     width: 100%;
-    height: 32px;
-    padding: 0 6px;
-    border: 1px solid #bfc4c9;
-    border-radius: 5px;
+    height: 35px;
+
+    border: 1px solid #b9bec3;
+    border-radius: 6px;
+
     background: #ffffff;
     color: #20242a;
+
     font-family: inherit;
-    font-size: 12px;
+    font-size: 14px;
+}
+
+input {
+    min-width: 0;
+    padding: 0 8px;
+}
+
+select {
+    min-width: 0;
+    padding: 0 5px;
 }
 
 input:focus,
 select:focus {
     outline: none;
-    border-color: #5d646b;
+    border-color: #555c63;
+}
+
+
+/* =====================================================
+   FESTE EINHEIT
+===================================================== */
+
+.fixed-unit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 35px;
+
+    color: #555b62;
+
+    font-size: 14px;
+    font-weight: 500;
 }
 
 
@@ -161,18 +234,28 @@ select:focus {
 .size-switch {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+
     gap: 3px;
-    margin-bottom: 4px;
+    margin: 0 0 6px;
 }
 
 .size-switch button {
-    height: 24px;
+    width: 100%;
+    height: 29px;
+
     border: 1px solid #d0d4d8;
-    border-radius: 5px;
-    background: #f4f5f6;
-    color: #70767d;
-    font-size: 8px;
+    border-radius: 6px;
+
+    background: #f3f4f5;
+
+    color: #6d737a;
+
+    font-family: inherit;
+    font-size: 10px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
@@ -188,14 +271,49 @@ select:focus {
 ===================================================== */
 
 .hint {
-    margin-top: 6px;
-    padding: 5px 7px;
-    border: 1px solid #d7dade;
-    border-radius: 6px;
-    background: #f5f6f7;
+    margin-top: 8px;
+    padding: 7px 9px;
+
+    border: 1px solid #d5d8db;
+    border-radius: 7px;
+
+    background: #f7f8f8;
+
     color: #70767d;
-    font-size: 8px;
-    line-height: 1.3;
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   WARNUNGEN
+===================================================== */
+
+.warning {
+    display: none;
+
+    margin-top: 7px;
+    padding: 7px 8px;
+
+    border: 1px solid #e2cda8;
+    border-radius: 6px;
+
+    background: #fff7e8;
+
+    color: #805d20;
+
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.warning ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.warning li + li {
+    margin-top: 3px;
 }
 
 
@@ -204,30 +322,41 @@ select:focus {
 ===================================================== */
 
 .result {
-    margin-top: 7px;
-    padding: 8px;
+    width: 100%;
+
+    margin-top: 9px;
+    padding: 10px;
+
     background: #ffffff;
-    border: 1px solid #aeb4ba;
-    border-radius: 7px;
+
+    border: 1px solid #adb3b9;
+    border-radius: 8px;
 }
 
 .result-label {
     color: #70767d;
-    font-size: 8px;
+    font-size: 11px;
 }
 
 .result-main {
-    margin-top: 2px;
-    font-size: 23px;
-    line-height: 1.05;
+    margin-top: 3px;
+
+    color: #20242a;
+
+    font-size: 26px;
+    line-height: 1.1;
     font-weight: 700;
+
+    letter-spacing: -0.3px;
 }
 
 .result-text {
-    margin-top: 3px;
+    margin-top: 5px;
+
     color: #70767d;
-    font-size: 7px;
-    line-height: 1.3;
+
+    font-size: 11px;
+    line-height: 1.4;
 }
 
 
@@ -237,33 +366,52 @@ select:focus {
 
 .details {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-    margin-top: 7px;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 5px;
+
+    margin-top: 9px;
 }
 
 .detail {
-    padding: 5px 6px;
+    min-width: 0;
+
+    padding: 7px;
+
     background: #f4f5f6;
-    border: 1px solid #e0e2e4;
-    border-radius: 5px;
+
+    border: 1px solid #dfe2e4;
+    border-radius: 6px;
 }
 
 .detail-label {
-    color: #777d84;
-    font-size: 7px;
+    color: #747a81;
+
+    font-size: 10px;
+    line-height: 1.25;
 }
 
 .detail-value {
-    margin-top: 2px;
-    font-size: 10px;
+    margin-top: 3px;
+
+    color: #292e34;
+
+    font-size: 12px;
+    line-height: 1.25;
     font-weight: 700;
+
+    word-break: break-word;
 }
 
 .detail-note {
-    margin-top: 1px;
-    color: #8a9096;
-    font-size: 6px;
+    margin-top: 2px;
+
+    color: #858b91;
+
+    font-size: 10px;
+    line-height: 1.25;
 }
 
 
@@ -272,50 +420,72 @@ select:focus {
 ===================================================== */
 
 .suggestions {
-    margin-top: 8px;
-    padding-top: 7px;
-    border-top: 1px solid #d9dcdf;
+    margin-top: 10px;
+    padding-top: 9px;
+
+    border-top: 1px solid #d8dbde;
 }
 
 .suggestion-title {
-    font-size: 9px;
+    font-size: 12px;
+    line-height: 1.25;
     font-weight: 700;
 }
 
 .suggestion-subtitle {
-    margin-top: 2px;
-    margin-bottom: 5px;
-    color: #777d84;
-    font-size: 7px;
+    margin-top: 3px;
+    margin-bottom: 7px;
+
+    color: #70767d;
+
+    font-size: 10px;
+    line-height: 1.35;
 }
 
 .suggestion-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 4px;
 }
 
 .suggestion {
-    padding: 5px 2px;
-    border: 1px solid #d3d6da;
-    border-radius: 5px;
+    min-width: 0;
+
+    padding: 7px 2px;
+
     background: #ffffff;
+
+    border: 1px solid #d2d5d8;
+    border-radius: 6px;
+
     text-align: center;
 }
 
 .suggestion.recommended {
-    border-color: #858b92;
+    border-color: #747b82;
+}
+
+.suggestion.invalid {
+    opacity: 0.65;
 }
 
 .suggestion .diameter {
-    font-size: 9px;
+    font-size: 11px;
+    line-height: 1.2;
     font-weight: 700;
 }
 
 .suggestion .force {
-    margin-top: 2px;
+    margin-top: 4px;
+
     font-size: 10px;
+    line-height: 1.2;
     font-weight: 700;
+
+    white-space: nowrap;
 }
 
 .suggestion .force.insufficient {
@@ -326,40 +496,56 @@ select:focus {
     color: #31834b;
 }
 
-.suggestion .area,
+.suggestion .force.invalid {
+    color: #8b5a00;
+}
+
+.suggestion .area {
+    margin-top: 3px;
+
+    color: #70767d;
+
+    font-size: 9px;
+    line-height: 1.2;
+}
+
 .suggestion .reserve {
-    margin-top: 1px;
-    color: #777d84;
-    font-size: 6px;
+    margin-top: 2px;
+
+    color: #70767d;
+
+    font-size: 9px;
+    line-height: 1.2;
 }
 
 
 /* =====================================================
-   WARNUNG / FORMEL
+   FORMEL
 ===================================================== */
 
-.warning {
-    display: none;
-    margin-top: 6px;
-    padding: 5px 7px;
-    border: 1px solid #e3cfab;
-    border-radius: 5px;
-    background: #fff7e9;
-    color: #825d20;
-    font-size: 7px;
-    line-height: 1.3;
-}
-
 .formula {
-    margin-top: 6px;
-    padding: 4px 6px;
-    border-radius: 5px;
-    background: #f1f2f3;
-    color: #777d84;
+    margin-top: 7px;
+
+    padding: 6px 7px;
+
+    border-radius: 6px;
+
+    background: #f0f1f2;
+
+    color: #70767d;
+
     font-family: monospace;
-    font-size: 7px;
+
+    font-size: 10px;
+    line-height: 1.3;
+
     overflow-x: auto;
 }
+
+
+/* =====================================================
+   AUSBLENDEN
+===================================================== */
 
 .hidden {
     display: none !important;
@@ -367,26 +553,51 @@ select:focus {
 
 
 /* =====================================================
-   KLEINE SMARTPHONES
+   KLEINE GERÄTE
 ===================================================== */
 
-@media (max-width: 380px) {
+@media (max-width: 280px) {
 
     .container {
-        padding-left: 5px;
-        padding-right: 5px;
+        width: calc(100% - 8px);
+    }
+
+    .input-box {
+        padding: 8px;
     }
 
     .input-row {
-        grid-template-columns: minmax(0, 1fr) 63px;
+        grid-template-columns:
+            minmax(0, 1fr) 60px;
+    }
+
+    .input-title {
+        font-size: 12px;
+    }
+
+    .input-comment {
+        font-size: 10px;
+    }
+}
+
+
+/* =====================================================
+   SEHR KLEINE GERÄTE
+===================================================== */
+
+@media (max-width: 250px) {
+
+    .container {
+        width: calc(100% - 6px);
+    }
+
+    .input-row {
+        grid-template-columns:
+            minmax(0, 1fr) 57px;
     }
 
     .result-main {
-        font-size: 21px;
-    }
-
-    .suggestion .force {
-        font-size: 9px;
+        font-size: 23px;
     }
 }
 
@@ -398,313 +609,255 @@ select:focus {
 
 <div class="container">
 
-    <h1>Zylinderkräfte Rechner</h1>
 
-    <div class="subtitle">
-        Kräfte, Drücke und Zylindergrößen
+<h1>Zylinderkräfte Rechner</h1>
+
+<div class="subtitle">
+    Kräfte, Drücke und Zylindergrößen
+</div>
+
+
+<!-- =================================================
+     BERECHNUNG
+================================================== -->
+
+<div class="section">
+
+    <div class="section-title">
+        Berechnung
+    </div>
+
+    <div class="tabs">
+
+        <button id="btnForce"
+                class="active"
+                type="button">
+            Kraft
+        </button>
+
+        <button id="btnPressure"
+                type="button">
+            Druck
+        </button>
+
+        <button id="btnCylinder"
+                type="button">
+            Zylinder
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     RICHTUNG
+================================================== -->
+
+<div class="section">
+
+    <div class="section-title">
+        Bewegungsrichtung
+    </div>
+
+    <div class="tabs two">
+
+        <button id="btnPush"
+                class="active"
+                type="button">
+            Ausfahren
+        </button>
+
+        <button id="btnPull"
+                type="button">
+            Einfahren
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     EINGABEN
+================================================== -->
+
+<div class="inputs">
+
+
+<!-- =================================================
+     KRAFT
+================================================== -->
+
+<div class="input-box"
+     id="forceBox">
+
+    <div class="input-box-header">
+
+        <div class="input-title"
+             id="forceTitle">
+            Kraft
+        </div>
+
+        <div class="input-comment"
+             id="forceComment">
+            Eingabe
+        </div>
+
+    </div>
+
+    <div class="input-row">
+
+        <input id="force"
+               type="number"
+               step="any"
+               min="0"
+               inputmode="decimal">
+
+        <select id="forceUnit">
+
+            <option value="N">N</option>
+            <option value="kN">kN</option>
+            <option value="MN">MN</option>
+            <option value="kgf">kgf</option>
+            <option value="lbf">lbf</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     DRUCK
+================================================== -->
+
+<div class="input-box"
+     id="pressureBox">
+
+    <div class="input-box-header">
+
+        <div class="input-title"
+             id="pressureTitle">
+            Druck
+        </div>
+
+        <div class="input-comment"
+             id="pressureComment">
+            Eingabe
+        </div>
+
+    </div>
+
+    <div class="input-row">
+
+        <input id="pressure"
+               type="number"
+               step="any"
+               min="0"
+               inputmode="decimal">
+
+        <select id="pressureUnit">
+
+            <option value="bar">bar</option>
+            <option value="MPa">MPa</option>
+            <option value="Nmm2">N/mm²</option>
+            <option value="Pa">N/m²</option>
+            <option value="kPa">kPa</option>
+            <option value="psi">psi</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     ZYLINDERGRÖSSE
+================================================== -->
+
+<div class="input-box"
+     id="existingCylinder">
+
+    <div class="input-box-header">
+
+        <div class="input-title">
+            Zylindergröße
+        </div>
+
+        <div class="input-comment"
+             id="cylinderComment">
+            Vorhandener Zylinder
+        </div>
+
     </div>
 
 
-    <!-- =================================================
-         BERECHNUNG
-    ================================================== -->
+    <div id="sizeControls">
 
-    <div class="section">
+        <div class="size-switch">
 
-        <div class="section-title">
-            Berechnung
-        </div>
-
-        <div class="tabs">
-
-            <button id="btnForce"
+            <button id="btnDiameter"
                     class="active"
-                    onclick="changeMode('force')">
-                Kraft
+                    type="button">
+                Durchmesser Ø
             </button>
 
-            <button id="btnPressure"
-                    onclick="changeMode('pressure')">
-                Druck
-            </button>
-
-            <button id="btnCylinder"
-                    onclick="changeMode('cylinder')">
-                Zylinder
+            <button id="btnArea"
+                    type="button">
+                Fläche A
             </button>
 
         </div>
 
-    </div>
 
+        <!-- DURCHMESSER -->
 
-    <!-- =================================================
-         RICHTUNG
-    ================================================== -->
-
-    <div class="section">
-
-        <div class="section-title">
-            Bewegungsrichtung
-        </div>
-
-        <div class="tabs two">
-
-            <button id="btnPush"
-                    class="active"
-                    onclick="changeDirection('push')">
-                Ausfahren
-            </button>
-
-            <button id="btnPull"
-                    onclick="changeDirection('pull')">
-                Einfahren
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         EINGABEN
-    ================================================== -->
-
-    <div class="inputs">
-
-
-        <!-- KRAFT -->
-
-        <div class="input-box"
-             id="forceBox">
-
-            <div class="input-box-header">
-
-                <div class="input-title">
-                    Kraft
-                </div>
-
-                <div class="input-comment">
-                    Eingabe
-                </div>
-
-            </div>
+        <div id="diameterInput">
 
             <div class="input-row">
 
-                <input id="force"
+                <input id="diameter"
                        type="number"
-                       step="any">
-
-                <select id="forceUnit">
-
-                    <option value="N">N</option>
-                    <option value="kN">kN</option>
-                    <option value="MN">MN</option>
-                    <option value="kgf">kgf</option>
-                    <option value="lbf">lbf</option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-        <!-- DRUCK -->
-
-        <div class="input-box"
-             id="pressureBox">
-
-            <div class="input-box-header">
-
-                <div class="input-title">
-                    Druck
-                </div>
-
-                <div class="input-comment">
-                    Eingabe
-                </div>
-
-            </div>
-
-            <div class="input-row">
-
-                <input id="pressure"
-                       type="number"
-                       step="any">
-
-                <select id="pressureUnit">
-
-                    <option value="bar">bar</option>
-                    <option value="MPa">MPa</option>
-                    <option value="Nmm2">N/mm²</option>
-                    <option value="Pa">N/m²</option>
-                    <option value="kPa">kPa</option>
-                    <option value="psi">psi</option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-
-        <!-- ZYLINDERGRÖSSE -->
-
-        <div class="input-box"
-             id="existingCylinder">
-
-            <div class="input-box-header">
-
-                <div class="input-title">
-                    Zylindergröße
-                </div>
-
-                <div class="input-comment">
-                    Vorhandener Zylinder
-                </div>
-
-            </div>
-
-
-            <div id="sizeControls">
-
-                <div class="size-switch">
-
-                    <button id="btnDiameter"
-                            class="active"
-                            onclick="changeSizeInput('diameter')">
-                        Durchmesser Ø
-                    </button>
-
-                    <button id="btnArea"
-                            onclick="changeSizeInput('area')">
-                        Fläche A
-                    </button>
-
-                </div>
-
-
-                <!-- DURCHMESSER -->
-
-                <div id="diameterInput">
-
-                    <div class="input-row">
-
-                        <input id="diameter"
-                               type="number"
-                               step="any">
-
-                        <select id="diameterUnit">
-
-                            <option value="mm">mm</option>
-                            <option value="cm">cm</option>
-                            <option value="m">m</option>
-                            <option value="in">in</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FLÄCHE -->
-
-                <div id="areaInput"
-                     class="hidden">
-
-                    <div class="input-row">
-
-                        <input id="area"
-                               type="number"
-                               step="any">
-
-                        <select id="areaUnit">
-
-                            <option value="mm2">mm²</option>
-                            <option value="cm2">cm²</option>
-                            <option value="m2">m²</option>
-                            <option value="in2">in²</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- KOLBENSTANGE -->
-
-            <div id="rodField"
-                 class="hidden"
-                 style="margin-top: 6px;">
-
-                <div class="input-box-header">
-
-                    <div class="input-title">
-                        Kolbenstange
-                    </div>
-
-                    <div class="input-comment">
-                        Nur bei Einfahren
-                    </div>
-
-                </div>
-
-                <div class="input-row">
-
-                    <input id="rod"
-                           type="number"
-                           step="any">
-
-                    <select id="rodUnit">
-
-                        <option value="mm">mm</option>
-                        <option value="cm">cm</option>
-                        <option value="m">m</option>
-                        <option value="in">in</option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- WIRKUNGSGRAD -->
-
-        <div class="input-box">
-
-            <div class="input-box-header">
-
-                <div class="input-title">
-                    Wirkungsgrad
-                </div>
-
-                <div class="input-comment">
-                    Standard 100 %
-                </div>
-
-            </div>
-
-            <div class="input-row">
-
-                <input id="efficiency"
-                       type="number"
-                       value="100"
+                       step="any"
                        min="0"
-                       max="100"
-                       step="any">
+                       inputmode="decimal">
 
-                <select disabled>
+                <select id="diameterUnit">
 
-                    <option>%</option>
+                    <option value="mm">mm</option>
+                    <option value="cm">cm</option>
+                    <option value="m">m</option>
+                    <option value="in">in</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- FLÄCHE -->
+
+        <div id="areaInput"
+             class="hidden">
+
+            <div class="input-row">
+
+                <input id="area"
+                       type="number"
+                       step="any"
+                       min="0"
+                       inputmode="decimal">
+
+                <select id="areaUnit">
+
+                    <option value="mm2">mm²</option>
+                    <option value="cm2">cm²</option>
+                    <option value="m2">m²</option>
+                    <option value="in2">in²</option>
 
                 </select>
 
@@ -715,125 +868,44 @@ select:focus {
     </div>
 
 
-    <!-- HINWEIS -->
-
-    <div class="hint"
-         id="hint">
-    </div>
-
-
     <!-- =================================================
-         ERGEBNIS
+         KOLBENSTANGE
     ================================================== -->
 
-    <div class="result">
+    <div id="rodField"
+         class="hidden"
+         style="margin-top:9px">
 
-        <div class="result-label"
-             id="resultLabel">
-            Ergebnis
-        </div>
+        <div class="input-box-header">
 
-        <div class="result-main"
-             id="resultMain">
-            –
-        </div>
-
-        <div class="result-text"
-             id="resultText">
-        </div>
-
-
-        <div class="details">
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Wirksame Fläche
-                </div>
-
-                <div class="detail-value"
-                     id="resultArea">
-                    –
-                </div>
-
-                <div class="detail-note"
-                     id="resultAreaNote">
-                </div>
-
+            <div class="input-title"
+                 id="rodTitle">
+                Kolbenstange
             </div>
 
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Kolbendurchmesser
-                </div>
-
-                <div class="detail-value"
-                     id="resultDiameter">
-                    –
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Druck
-                </div>
-
-                <div class="detail-value"
-                     id="resultPressure">
-                    –
-                </div>
-
-            </div>
-
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Kraft
-                </div>
-
-                <div class="detail-value"
-                     id="resultForce">
-                    –
-                </div>
-
+            <div class="input-comment">
+                Nur bei Einfahren
             </div>
 
         </div>
 
+        <div class="input-row">
 
-        <!-- ZYLINDERVORSCHLÄGE -->
+            <input id="rod"
+                   type="number"
+                   step="any"
+                   min="0"
+                   inputmode="decimal">
 
-        <div id="suggestions"
-             class="suggestions hidden">
+            <select id="rodUnit">
 
-            <div class="suggestion-title">
-                Mögliche Zylinderdurchmesser
-            </div>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="m">m</option>
+                <option value="in">in</option>
 
-            <div class="suggestion-subtitle">
-                Resultierende Kraft bei aktuellem Druck
-            </div>
+            </select>
 
-            <div id="suggestionGrid"
-                 class="suggestion-grid">
-            </div>
-
-        </div>
-
-
-        <div id="warning"
-             class="warning">
-        </div>
-
-
-        <div id="formula"
-             class="formula">
         </div>
 
     </div>
@@ -841,138 +913,262 @@ select:focus {
 </div>
 
 
+<!-- =================================================
+     WIRKUNGSGRAD
+================================================== -->
+
+<div class="input-box">
+
+    <div class="input-box-header">
+
+        <div class="input-title">
+            Wirkungsgrad
+        </div>
+
+        <div class="input-comment">
+            0 < η ≤ 100 %
+        </div>
+
+    </div>
+
+    <div class="input-row">
+
+        <input id="efficiency"
+               type="number"
+               value="100"
+               min="0"
+               max="100"
+               step="any"
+               inputmode="decimal">
+
+        <div class="fixed-unit">
+            %
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     HINWEIS
+================================================== -->
+
+<div class="hint"
+     id="hint">
+</div>
+
+
+<!-- =================================================
+     WARNUNG
+================================================== -->
+
+<div class="warning"
+     id="warning">
+</div>
+
+
+<!-- =================================================
+     ERGEBNIS
+================================================== -->
+
+<div class="result">
+
+    <div class="result-label"
+         id="resultLabel">
+        Ergebnis
+    </div>
+
+    <div class="result-main"
+         id="resultMain">
+        –
+    </div>
+
+    <div class="result-text"
+         id="resultText">
+    </div>
+
+
+    <div class="details">
+
+        <div class="detail">
+
+            <div class="detail-label">
+                Wirksame Fläche
+            </div>
+
+            <div class="detail-value"
+                 id="resultArea">
+                –
+            </div>
+
+            <div class="detail-note"
+                 id="resultAreaNote">
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="detail-label">
+                Kolbendurchmesser
+            </div>
+
+            <div class="detail-value"
+                 id="resultDiameter">
+                –
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="detail-label">
+                Druck
+            </div>
+
+            <div class="detail-value"
+                 id="resultPressure">
+                –
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="detail-label">
+                Kraft
+            </div>
+
+            <div class="detail-value"
+                 id="resultForce">
+                –
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         ZYLINDERVORSCHLÄGE
+    ================================================== -->
+
+    <div id="suggestions"
+         class="suggestions hidden">
+
+        <div class="suggestion-title">
+            Mögliche Zylinderdurchmesser
+        </div>
+
+        <div class="suggestion-subtitle">
+            Resultierende Kraft bei aktuellem Druck
+        </div>
+
+        <div id="suggestionGrid"
+             class="suggestion-grid">
+        </div>
+
+    </div>
+
+
+    <div id="formula"
+         class="formula">
+    </div>
+
+</div>
+
+</div>
+
+
 <script>
+
+'use strict';
+
 
 /* =====================================================
    ZUSTAND
 ===================================================== */
 
-let mode = "force";
-let direction = "push";
-let sizeInput = "diameter";
+let mode = 'force';
+let direction = 'push';
+let sizeInput = 'diameter';
 
 
 /* =====================================================
-   HILFSFUNKTIONEN
+   ELEMENTZUGRIFF
 ===================================================== */
 
-function get(id) {
-    return document.getElementById(id);
-}
+const $ = id =>
+    document.getElementById(id);
 
 
-function value(id) {
+/* =====================================================
+   AKTUELLE EINHEITEN
+
+   Wird benötigt, damit beim Wechsel der Einheit
+   der physikalische Wert erhalten bleibt.
+===================================================== */
+
+const unitState = {
+
+    forceUnit: 'N',
+
+    pressureUnit: 'bar',
+
+    diameterUnit: 'mm',
+
+    areaUnit: 'mm2',
+
+    rodUnit: 'mm'
+
+};
+
+
+/* =====================================================
+   ZAHL EINLESEN
+===================================================== */
+
+function num(id) {
+
+    const raw =
+        $(id).value.trim();
+
+
+    if (raw === '')
+        return null;
+
 
     const n =
-        parseFloat(
-            get(id).value
-        );
+        Number(raw);
+
 
     return Number.isFinite(n)
         ? n
-        : 0;
+        : null;
 }
 
 
 /* =====================================================
-   EINHEITENUMRECHNUNG
-===================================================== */
-
-function toN(value, unit) {
-
-    if (unit === "N")
-        return value;
-
-    if (unit === "kN")
-        return value * 1000;
-
-    if (unit === "MN")
-        return value * 1000000;
-
-    if (unit === "kgf")
-        return value * 9.80665;
-
-    if (unit === "lbf")
-        return value * 4.448221615;
-
-    return value;
-}
-
-
-function toNmm2(value, unit) {
-
-    if (unit === "bar")
-        return value * 0.1;
-
-    if (unit === "MPa")
-        return value;
-
-    if (unit === "Nmm2")
-        return value;
-
-    if (unit === "Pa")
-        return value / 1000000;
-
-    if (unit === "kPa")
-        return value / 1000;
-
-    if (unit === "psi")
-        return value * 0.006894757293;
-
-    return value;
-}
-
-
-function toMM(value, unit) {
-
-    if (unit === "mm")
-        return value;
-
-    if (unit === "cm")
-        return value * 10;
-
-    if (unit === "m")
-        return value * 1000;
-
-    if (unit === "in")
-        return value * 25.4;
-
-    return value;
-}
-
-
-function toMM2(value, unit) {
-
-    if (unit === "mm2")
-        return value;
-
-    if (unit === "cm2")
-        return value * 100;
-
-    if (unit === "m2")
-        return value * 1000000;
-
-    if (unit === "in2")
-        return value * 645.16;
-
-    return value;
-}
-
-
-/* =====================================================
-   AUSGABE
+   ZAHL FORMATIEREN
 ===================================================== */
 
 function formatNumber(
-    number,
+    n,
     decimals = 2
 ) {
 
-    if (!Number.isFinite(number))
-        return "–";
+    if (!Number.isFinite(n))
+        return '–';
 
-    return number.toLocaleString(
-        "de-DE",
+
+    return n.toLocaleString(
+        'de-DE',
         {
             minimumFractionDigits: decimals,
             maximumFractionDigits: decimals
@@ -981,124 +1177,556 @@ function formatNumber(
 }
 
 
-function showForce(number) {
+/* =====================================================
+   KRAFT
+===================================================== */
 
-    const unit =
-        get("forceUnit").value;
+function toN(value, unit) {
 
-    let result = number;
+    const factor = {
 
-    if (unit === "kN")
-        result = number / 1000;
+        N: 1,
 
-    if (unit === "MN")
-        result = number / 1000000;
+        kN: 1000,
 
-    if (unit === "kgf")
-        result = number / 9.80665;
+        MN: 1000000,
 
-    if (unit === "lbf")
-        result = number / 4.448221615;
+        kgf: 9.80665,
 
-    return formatNumber(result) +
-        " " +
-        unit;
+        lbf: 4.448221615
+
+    };
+
+
+    return value * factor[unit];
 }
 
 
-function showPressure(number) {
+function fromN(value, unit) {
+
+    const factor = {
+
+        N: 1,
+
+        kN: 1000,
+
+        MN: 1000000,
+
+        kgf: 9.80665,
+
+        lbf: 4.448221615
+
+    };
+
+
+    return value / factor[unit];
+}
+
+
+/* =====================================================
+   DRUCK
+
+   Interne Einheit: N/mm²
+===================================================== */
+
+function toNmm2(value, unit) {
+
+    const factor = {
+
+        bar: 0.1,
+
+        MPa: 1,
+
+        Nmm2: 1,
+
+        Pa: 0.000001,
+
+        kPa: 0.001,
+
+        psi: 0.006894757293
+
+    };
+
+
+    return value * factor[unit];
+}
+
+
+function fromNmm2(value, unit) {
+
+    const factor = {
+
+        bar: 0.1,
+
+        MPa: 1,
+
+        Nmm2: 1,
+
+        Pa: 0.000001,
+
+        kPa: 0.001,
+
+        psi: 0.006894757293
+
+    };
+
+
+    return value / factor[unit];
+}
+
+
+/* =====================================================
+   LÄNGE
+
+   Interne Einheit: mm
+===================================================== */
+
+function toMM(value, unit) {
+
+    const factor = {
+
+        mm: 1,
+
+        cm: 10,
+
+        m: 1000,
+
+        in: 25.4
+
+    };
+
+
+    return value * factor[unit];
+}
+
+
+function fromMM(value, unit) {
+
+    const factor = {
+
+        mm: 1,
+
+        cm: 10,
+
+        m: 1000,
+
+        in: 25.4
+
+    };
+
+
+    return value / factor[unit];
+}
+
+
+/* =====================================================
+   FLÄCHE
+
+   Interne Einheit: mm²
+===================================================== */
+
+function toMM2(value, unit) {
+
+    const factor = {
+
+        mm2: 1,
+
+        cm2: 100,
+
+        m2: 1000000,
+
+        in2: 645.16
+
+    };
+
+
+    return value * factor[unit];
+}
+
+
+function fromMM2(value, unit) {
+
+    const factor = {
+
+        mm2: 1,
+
+        cm2: 100,
+
+        m2: 1000000,
+
+        in2: 645.16
+
+    };
+
+
+    return value / factor[unit];
+}
+
+
+/* =====================================================
+   AUSGABEFORMAT
+===================================================== */
+
+function showForce(value) {
 
     const unit =
-        get("pressureUnit").value;
+        $('forceUnit').value;
 
-    let result = number;
+
+    return (
+        formatNumber(
+            fromN(value, unit)
+        ) +
+        ' ' +
+        unit
+    );
+}
+
+
+function showPressure(value) {
+
+    const unit =
+        $('pressureUnit').value;
+
+
     let label = unit;
 
-    if (unit === "bar")
-        result = number / 0.1;
 
-    if (unit === "Pa") {
+    if (unit === 'Nmm2')
+        label = 'N/mm²';
 
-        result =
-            number * 1000000;
 
-        label = "N/m²";
-    }
+    if (unit === 'Pa')
+        label = 'N/m²';
 
-    if (unit === "kPa")
-        result = number * 1000;
 
-    if (unit === "psi")
-        result =
-            number /
-            0.006894757293;
-
-    if (unit === "Nmm2")
-        label = "N/mm²";
-
-    return formatNumber(result) +
-        " " +
-        label;
+    return (
+        formatNumber(
+            fromNmm2(value, unit)
+        ) +
+        ' ' +
+        label
+    );
 }
 
 
-function showArea(number) {
+function showArea(value) {
 
     const unit =
-        get("areaUnit").value;
+        $('areaUnit').value;
 
-    let result = number;
-    let label = "mm²";
 
-    if (unit === "cm2") {
+    let label;
 
-        result =
-            number / 100;
 
-        label = "cm²";
-    }
+    if (unit === 'mm2')
+        label = 'mm²';
 
-    if (unit === "m2") {
+    else if (unit === 'cm2')
+        label = 'cm²';
 
-        result =
-            number / 1000000;
+    else if (unit === 'm2')
+        label = 'm²';
 
-        label = "m²";
-    }
+    else
+        label = 'in²';
 
-    if (unit === "in2") {
 
-        result =
-            number / 645.16;
-
-        label = "in²";
-    }
-
-    return formatNumber(result) +
-        " " +
-        label;
+    return (
+        formatNumber(
+            fromMM2(value, unit)
+        ) +
+        ' ' +
+        label
+    );
 }
 
 
-function showDiameter(number) {
+function showDiameter(value) {
 
     const unit =
-        get("diameterUnit").value;
+        $('diameterUnit').value;
 
-    let result = number;
 
-    if (unit === "cm")
-        result = number / 10;
+    return (
+        formatNumber(
+            fromMM(value, unit)
+        ) +
+        ' ' +
+        unit
+    );
+}
 
-    if (unit === "m")
-        result = number / 1000;
 
-    if (unit === "in")
-        result = number / 25.4;
+/* =====================================================
+   ZENTRALE WARNUNGSVERWALTUNG
+===================================================== */
 
-    return formatNumber(result) +
-        " " +
-        unit;
+function setWarnings(messages) {
+
+    const box =
+        $('warning');
+
+
+    const unique =
+        [
+            ...new Set(
+                messages.filter(Boolean)
+            )
+        ];
+
+
+    if (unique.length === 0) {
+
+        box.style.display =
+            'none';
+
+        box.innerHTML = '';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        '<ul>' +
+        unique
+            .map(
+                message =>
+                    '<li>' +
+                    message +
+                    '</li>'
+            )
+            .join('') +
+        '</ul>';
+
+
+    box.style.display =
+        'block';
+}
+
+
+/* =====================================================
+   BISHERIGE WARNUNGEN LESEN
+===================================================== */
+
+function getCurrentWarnings() {
+
+    const box =
+        $('warning');
+
+
+    if (
+        box.style.display === 'none' ||
+        !box.textContent.trim()
+    ) {
+
+        return [];
+    }
+
+
+    return [
+        ...box.querySelectorAll('li')
+    ]
+    .map(
+        li => li.textContent
+    );
+}
+
+
+/* =====================================================
+   ERGEBNISSE ZURÜCKSETZEN
+===================================================== */
+
+function resetResults() {
+
+    $('resultMain').textContent =
+        '–';
+
+    $('resultText').textContent =
+        '';
+
+    $('resultArea').textContent =
+        '–';
+
+    $('resultDiameter').textContent =
+        '–';
+
+    $('resultPressure').textContent =
+        '–';
+
+    $('resultForce').textContent =
+        '–';
+
+    $('resultAreaNote').textContent =
+        '';
+
+    $('suggestions')
+        .classList.add('hidden');
+
+    $('suggestionGrid').innerHTML =
+        '';
+
+    $('formula').textContent =
+        getFormula();
+}
+
+
+/* =====================================================
+   NEGATIVE EINGABEN VERHINDERN
+===================================================== */
+
+function sanitizeNumber(id) {
+
+    const element =
+        $(id);
+
+
+    if (
+        element.value.trim() === ''
+    ) {
+
+        return;
+    }
+
+
+    const n =
+        Number(element.value);
+
+
+    if (!Number.isFinite(n)) {
+
+        element.value = '';
+
+        return;
+    }
+
+
+    const positiveFields = [
+
+        'force',
+        'pressure',
+        'diameter',
+        'area',
+        'rod'
+
+    ];
+
+
+    if (
+        positiveFields.includes(id) &&
+        n < 0
+    ) {
+
+        element.value = '';
+
+        return;
+    }
+
+
+    if (
+        id === 'efficiency' &&
+        n < 0
+    ) {
+
+        element.value = '';
+
+        return;
+    }
+
+
+    if (
+        id === 'efficiency' &&
+        n > 100
+    ) {
+
+        element.value = '100';
+    }
+}
+
+
+/* =====================================================
+   EINHEIT WECHSELN
+
+   Der physikalische Wert bleibt erhalten.
+===================================================== */
+
+function convertUnitValue(
+    inputId,
+    oldUnit,
+    newUnit,
+    toBase,
+    fromBase
+) {
+
+    const value =
+        num(inputId);
+
+
+    if (value === null)
+        return;
+
+
+    const baseValue =
+        toBase(
+            value,
+            oldUnit
+        );
+
+
+    const converted =
+        fromBase(
+            baseValue,
+            newUnit
+        );
+
+
+    if (
+        Number.isFinite(converted)
+    ) {
+
+        $(inputId).value =
+            String(
+                Number(
+                    converted.toPrecision(12)
+                )
+            );
+    }
+}
+
+
+function handleUnitChange(
+    id,
+    toBase,
+    fromBase
+) {
+
+    const oldUnit =
+        unitState[id];
+
+
+    const newUnit =
+        $(id).value;
+
+
+    if (
+        oldUnit !== newUnit
+    ) {
+
+        convertUnitValue(
+            id,
+            oldUnit,
+            newUnit,
+            toBase,
+            fromBase
+        );
+    }
+
+
+    unitState[id] =
+        newUnit;
+
+
+    calculate();
 }
 
 
@@ -1108,53 +1736,73 @@ function showDiameter(number) {
 
 function changeMode(newMode) {
 
-    mode = newMode;
+    mode =
+        newMode;
 
-    get("btnForce")
-        .classList.toggle(
-            "active",
-            mode === "force"
-        );
 
-    get("btnPressure")
-        .classList.toggle(
-            "active",
-            mode === "pressure"
-        );
-
-    get("btnCylinder")
-        .classList.toggle(
-            "active",
-            mode === "cylinder"
-        );
-
+    updateButtons();
     updateInterface();
     calculate();
 }
 
 
 /* =====================================================
-   RICHTUNG
+   BEWEGUNGSRICHTUNG
 ===================================================== */
 
-function changeDirection(newDirection) {
+function changeDirection(
+    newDirection
+) {
 
-    direction = newDirection;
+    direction =
+        newDirection;
 
-    get("btnPush")
-        .classList.toggle(
-            "active",
-            direction === "push"
-        );
 
-    get("btnPull")
-        .classList.toggle(
-            "active",
-            direction === "pull"
-        );
-
+    updateButtons();
     updateInterface();
     calculate();
+}
+
+
+/* =====================================================
+   BUTTONSTATUS
+===================================================== */
+
+function updateButtons() {
+
+    $('btnForce')
+        .classList.toggle(
+            'active',
+            mode === 'force'
+        );
+
+
+    $('btnPressure')
+        .classList.toggle(
+            'active',
+            mode === 'pressure'
+        );
+
+
+    $('btnCylinder')
+        .classList.toggle(
+            'active',
+            mode === 'cylinder'
+        );
+
+
+    $('btnPush')
+        .classList.toggle(
+            'active',
+            direction === 'push'
+        );
+
+
+    $('btnPull')
+        .classList.toggle(
+            'active',
+            direction === 'pull'
+        );
 }
 
 
@@ -1162,123 +1810,125 @@ function changeDirection(newDirection) {
    DURCHMESSER / FLÄCHE
 ===================================================== */
 
-function changeSizeInput(newType) {
+function changeSizeInput(
+    type
+) {
 
     if (
-        sizeInput === "diameter" &&
-        newType === "area"
+        type === sizeInput
     ) {
 
-        const diameter =
-            toMM(
-                value("diameter"),
-                get("diameterUnit").value
-            );
-
-        if (diameter > 0) {
-
-            const area =
-                Math.PI *
-                diameter *
-                diameter /
-                4;
-
-            const unit =
-                get("areaUnit").value;
-
-            let displayed = area;
-
-            if (unit === "cm2")
-                displayed = area / 100;
-
-            if (unit === "m2")
-                displayed = area / 1000000;
-
-            if (unit === "in2")
-                displayed = area / 645.16;
-
-            get("area").value =
-                Number(
-                    displayed.toPrecision(10)
-                );
-        }
+        return;
     }
 
 
     if (
-        sizeInput === "area" &&
-        newType === "diameter"
+        type === 'area'
     ) {
 
-        const area =
-            toMM2(
-                value("area"),
-                get("areaUnit").value
-            );
+        const diameter =
+            num('diameter');
 
-        if (area > 0) {
+
+        if (
+            diameter !== null &&
+            diameter >= 0
+        ) {
+
+            const diameterMM =
+                toMM(
+                    diameter,
+                    $('diameterUnit').value
+                );
+
+
+            const area =
+                Math.PI *
+                diameterMM *
+                diameterMM /
+                4;
+
+
+            $('area').value =
+                String(
+                    Number(
+                        fromMM2(
+                            area,
+                            $('areaUnit').value
+                        ).toPrecision(12)
+                    )
+                );
+        }
+
+    } else {
+
+        const area =
+            num('area');
+
+
+        if (
+            area !== null &&
+            area >= 0
+        ) {
+
+            const areaMM2 =
+                toMM2(
+                    area,
+                    $('areaUnit').value
+                );
+
 
             const diameter =
                 Math.sqrt(
                     4 *
-                    area /
+                    areaMM2 /
                     Math.PI
                 );
 
-            const unit =
-                get("diameterUnit").value;
 
-            let displayed = diameter;
-
-            if (unit === "cm")
-                displayed = diameter / 10;
-
-            if (unit === "m")
-                displayed = diameter / 1000;
-
-            if (unit === "in")
-                displayed = diameter / 25.4;
-
-            get("diameter").value =
-                Number(
-                    displayed.toPrecision(10)
+            $('diameter').value =
+                String(
+                    Number(
+                        fromMM(
+                            diameter,
+                            $('diameterUnit').value
+                        ).toPrecision(12)
+                    )
                 );
         }
     }
 
 
-    sizeInput = newType;
+    sizeInput =
+        type;
 
 
-    get("btnDiameter")
+    $('btnDiameter')
         .classList.toggle(
-            "active",
-            sizeInput === "diameter"
-        );
-
-    get("btnArea")
-        .classList.toggle(
-            "active",
-            sizeInput === "area"
+            'active',
+            type === 'diameter'
         );
 
 
-    if (sizeInput === "diameter") {
+    $('btnArea')
+        .classList.toggle(
+            'active',
+            type === 'area'
+        );
 
-        get("diameterInput")
-            .classList.remove("hidden");
 
-        get("areaInput")
-            .classList.add("hidden");
+    $('diameterInput')
+        .classList.toggle(
+            'hidden',
+            type !== 'diameter'
+        );
 
-    } else {
 
-        get("diameterInput")
-            .classList.add("hidden");
-
-        get("areaInput")
-            .classList.remove("hidden");
-    }
+    $('areaInput')
+        .classList.toggle(
+            'hidden',
+            type !== 'area'
+        );
 
 
     calculate();
@@ -1286,163 +1936,93 @@ function changeSizeInput(newType) {
 
 
 /* =====================================================
-   OBERFLÄCHE AKTUALISIEREN
-===================================================== */
-
-function updateInterface() {
-
-    /*
-       Nur tatsächlich benötigte
-       Eingabefelder anzeigen.
-    */
-
-    if (mode === "force") {
-
-        get("forceBox")
-            .classList.add("hidden");
-
-        get("pressureBox")
-            .classList.remove("hidden");
-
-    } else if (mode === "pressure") {
-
-        get("forceBox")
-            .classList.remove("hidden");
-
-        get("pressureBox")
-            .classList.add("hidden");
-
-    } else {
-
-        get("forceBox")
-            .classList.remove("hidden");
-
-        get("pressureBox")
-            .classList.remove("hidden");
-    }
-
-
-    /*
-       Zylindergröße
-    */
-
-    if (mode === "cylinder") {
-
-        if (direction === "push") {
-
-            get("existingCylinder")
-                .classList.add("hidden");
-
-        } else {
-
-            get("existingCylinder")
-                .classList.remove("hidden");
-
-            get("sizeControls")
-                .classList.add("hidden");
-
-            get("rodField")
-                .classList.remove("hidden");
-        }
-
-    } else {
-
-        get("existingCylinder")
-            .classList.remove("hidden");
-
-        get("sizeControls")
-            .classList.remove("hidden");
-
-
-        if (direction === "pull") {
-
-            get("rodField")
-                .classList.remove("hidden");
-
-        } else {
-
-            get("rodField")
-                .classList.add("hidden");
-        }
-    }
-
-
-    /*
-       Hinweise
-    */
-
-    if (mode === "force") {
-
-        get("hint").textContent =
-            direction === "push"
-                ? "Druck und Zylindergröße eingeben."
-                : "Druck, Zylindergröße und Stangendurchmesser eingeben.";
-    }
-
-
-    if (mode === "pressure") {
-
-        get("hint").textContent =
-            direction === "push"
-                ? "Benötigte Kraft und Zylindergröße eingeben."
-                : "Benötigte Kraft, Zylindergröße und Stangendurchmesser eingeben.";
-    }
-
-
-    if (mode === "cylinder") {
-
-        get("hint").textContent =
-            direction === "push"
-                ? "Kraft und Druck eingeben. Fläche und Kolbendurchmesser werden berechnet."
-                : "Kraft, Druck und Stangendurchmesser eingeben. Fläche und Kolbendurchmesser werden berechnet.";
-    }
-}
-
-
-/* =====================================================
    ZYLINDERGEOMETRIE
 ===================================================== */
 
-function getCylinderGeometry() {
+function getGeometry() {
 
-    let diameter = 0;
-    let pistonArea = 0;
+    let diameter = null;
+    let pistonArea = null;
 
 
-    if (sizeInput === "diameter") {
+    if (
+        sizeInput === 'diameter'
+    ) {
+
+        const value =
+            num('diameter');
+
+
+        if (
+            value === null ||
+            value <= 0
+        ) {
+
+            return {
+                diameter: null,
+                pistonArea: null
+            };
+        }
+
 
         diameter =
             toMM(
-                value("diameter"),
-                get("diameterUnit").value
+                value,
+                $('diameterUnit').value
             );
 
-        if (diameter > 0) {
 
-            pistonArea =
-                Math.PI *
-                diameter *
-                diameter /
-                4;
-        }
+        pistonArea =
+            Math.PI *
+            diameter *
+            diameter /
+            4;
 
     } else {
 
+        const value =
+            num('area');
+
+
+        if (
+            value === null ||
+            value <= 0
+        ) {
+
+            return {
+                diameter: null,
+                pistonArea: null
+            };
+        }
+
+
         pistonArea =
             toMM2(
-                value("area"),
-                get("areaUnit").value
+                value,
+                $('areaUnit').value
             );
 
-        if (pistonArea > 0) {
 
-            diameter =
-                Math.sqrt(
-                    4 *
-                    pistonArea /
-                    Math.PI
-                );
-        }
+        diameter =
+            Math.sqrt(
+                4 *
+                pistonArea /
+                Math.PI
+            );
+    }
+
+
+    if (
+        !Number.isFinite(diameter) ||
+        !Number.isFinite(pistonArea) ||
+        diameter <= 0 ||
+        pistonArea <= 0
+    ) {
+
+        return {
+            diameter: null,
+            pistonArea: null
+        };
     }
 
 
@@ -1458,41 +2038,302 @@ function getCylinderGeometry() {
 ===================================================== */
 
 function getEffectiveArea(
-    pistonArea,
-    diameter
+    geometry
 ) {
 
-    if (pistonArea <= 0)
-        return 0;
+    if (
+        !geometry.pistonArea ||
+        !geometry.diameter
+    ) {
+
+        return null;
+    }
 
 
-    if (direction === "push")
-        return pistonArea;
+    if (
+        direction === 'push'
+    ) {
+
+        return geometry.pistonArea;
+    }
 
 
     const rod =
+        num('rod');
+
+
+    if (
+        rod === null ||
+        rod <= 0
+    ) {
+
+        return null;
+    }
+
+
+    const rodMM =
         toMM(
-            value("rod"),
-            get("rodUnit").value
+            rod,
+            $('rodUnit').value
         );
 
 
     if (
-        rod <= 0 ||
-        rod >= diameter
+        !Number.isFinite(rodMM) ||
+        rodMM >= geometry.diameter
     ) {
-        return 0;
+
+        return null;
     }
 
 
-    return Math.PI *
+    const area =
+        Math.PI *
         (
-            diameter *
-            diameter -
-            rod *
-            rod
+            geometry.diameter ** 2 -
+            rodMM ** 2
         ) /
         4;
+
+
+    return (
+        Number.isFinite(area) &&
+        area > 0
+    )
+        ? area
+        : null;
+}
+
+
+/* =====================================================
+   EINGABEN PRÜFEN
+===================================================== */
+
+function getRequiredInputs() {
+
+    const warnings = [];
+
+
+    const force =
+        num('force');
+
+
+    const pressure =
+        num('pressure');
+
+
+    const efficiency =
+        num('efficiency');
+
+
+    /* Wirkungsgrad */
+
+    if (
+        efficiency === null
+    ) {
+
+        warnings.push(
+            'Wirkungsgrad eingeben.'
+        );
+
+    } else if (
+        efficiency <= 0
+    ) {
+
+        warnings.push(
+            'Der Wirkungsgrad muss größer als 0 % sein.'
+        );
+
+    } else if (
+        efficiency > 100
+    ) {
+
+        warnings.push(
+            'Der Wirkungsgrad darf maximal 100 % betragen.'
+        );
+    }
+
+
+    /* Kraftmodus */
+
+    if (
+        mode === 'force'
+    ) {
+
+        if (
+            pressure === null
+        ) {
+
+            warnings.push(
+                'Druck eingeben.'
+            );
+
+        } else if (
+            pressure <= 0
+        ) {
+
+            warnings.push(
+                'Druck muss größer als 0 sein.'
+            );
+        }
+    }
+
+
+    /* Druckmodus */
+
+    if (
+        mode === 'pressure'
+    ) {
+
+        if (
+            force === null
+        ) {
+
+            warnings.push(
+                'Kraft eingeben.'
+            );
+
+        } else if (
+            force <= 0
+        ) {
+
+            warnings.push(
+                'Kraft muss größer als 0 sein.'
+            );
+        }
+    }
+
+
+    /* Zylinderauslegung */
+
+    if (
+        mode === 'cylinder'
+    ) {
+
+        if (
+            force === null
+        ) {
+
+            warnings.push(
+                'Benötigte Kraft eingeben.'
+            );
+
+        } else if (
+            force <= 0
+        ) {
+
+            warnings.push(
+                'Benötigte Kraft muss größer als 0 sein.'
+            );
+        }
+
+
+        if (
+            pressure === null
+        ) {
+
+            warnings.push(
+                'Benötigten Druck eingeben.'
+            );
+
+        } else if (
+            pressure <= 0
+        ) {
+
+            warnings.push(
+                'Benötigter Druck muss größer als 0 sein.'
+            );
+        }
+    }
+
+
+    /* Vorhandene Zylinder */
+
+    const needsGeometry =
+        mode === 'force' ||
+        mode === 'pressure';
+
+
+    if (
+        needsGeometry
+    ) {
+
+        const geometry =
+            getGeometry();
+
+
+        if (
+            !geometry.diameter
+        ) {
+
+            warnings.push(
+                sizeInput === 'diameter'
+                    ? 'Kolbendurchmesser eingeben.'
+                    : 'Kolbenfläche eingeben.'
+            );
+        }
+
+
+        if (
+            direction === 'pull'
+        ) {
+
+            const rod =
+                num('rod');
+
+
+            if (
+                rod === null
+            ) {
+
+                warnings.push(
+                    'Stangendurchmesser eingeben.'
+                );
+
+            } else if (
+                rod <= 0
+            ) {
+
+                warnings.push(
+                    'Stangendurchmesser muss größer als 0 sein.'
+                );
+
+            } else if (
+                geometry.diameter
+            ) {
+
+                const rodMM =
+                    toMM(
+                        rod,
+                        $('rodUnit').value
+                    );
+
+
+                if (
+                    rodMM >=
+                    geometry.diameter
+                ) {
+
+                    warnings.push(
+                        'Stangendurchmesser muss kleiner als der Kolbendurchmesser sein.'
+                    );
+                }
+            }
+        }
+    }
+
+
+    const valid =
+        warnings.length === 0;
+
+
+    return {
+        warnings,
+        valid,
+        force,
+        pressure,
+        efficiency
+    };
 }
 
 
@@ -1502,28 +2343,27 @@ function getEffectiveArea(
 
 function calculate() {
 
-    const efficiency =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                value("efficiency")
-            )
-        ) / 100;
+    const check =
+        getRequiredInputs();
 
 
-    const enteredForce =
-        toN(
-            value("force"),
-            get("forceUnit").value
-        );
+    setWarnings(
+        check.warnings
+    );
 
 
-    const enteredPressure =
-        toNmm2(
-            value("pressure"),
-            get("pressureUnit").value
-        );
+    if (
+        !check.valid
+    ) {
+
+        resetResults();
+
+        return;
+    }
+
+
+    const eta =
+        check.efficiency / 100;
 
 
     let force = 0;
@@ -1532,118 +2372,200 @@ function calculate() {
     let diameter = 0;
 
 
+    /* ================================================
+       KRAFT / DRUCK
+    ================================================= */
+
     if (
-        mode === "force" ||
-        mode === "pressure"
+        mode === 'force' ||
+        mode === 'pressure'
     ) {
 
         const geometry =
-            getCylinderGeometry();
+            getGeometry();
 
 
-        area =
+        const effectiveArea =
             getEffectiveArea(
-                geometry.pistonArea,
-                geometry.diameter
+                geometry
             );
+
+
+        if (
+            !effectiveArea
+        ) {
+
+            setWarnings([
+                'Die wirksame Zylinderfläche konnte nicht bestimmt werden.'
+            ]);
+
+            resetResults();
+
+            return;
+        }
 
 
         diameter =
             geometry.diameter;
 
 
-        if (mode === "force") {
+        area =
+            effectiveArea;
+
+
+        /* Kraft berechnen */
+
+        if (
+            mode === 'force'
+        ) {
 
             pressure =
-                enteredPressure;
+                toNmm2(
+                    check.pressure,
+                    $('pressureUnit').value
+                );
 
-            if (
-                pressure > 0 &&
-                area > 0
-            ) {
 
-                force =
-                    pressure *
-                    area *
-                    efficiency;
-            }
+            force =
+                pressure *
+                area *
+                eta;
         }
 
 
-        if (mode === "pressure") {
+        /* Druck berechnen */
+
+        else {
 
             force =
-                enteredForce;
+                toN(
+                    check.force,
+                    $('forceUnit').value
+                );
 
-            if (
-                force > 0 &&
-                area > 0
-            ) {
 
-                pressure =
-                    force /
-                    (
-                        area *
-                        efficiency
-                    );
-            }
+            pressure =
+                force /
+                (
+                    area *
+                    eta
+                );
         }
     }
 
 
-    if (mode === "cylinder") {
+    /* ================================================
+       ZYLINDER AUSLEGEN
+    ================================================= */
+
+    if (
+        mode === 'cylinder'
+    ) {
 
         force =
-            enteredForce;
+            toN(
+                check.force,
+                $('forceUnit').value
+            );
+
 
         pressure =
-            enteredPressure;
+            toNmm2(
+                check.pressure,
+                $('pressureUnit').value
+            );
+
+
+        area =
+            force /
+            (
+                pressure *
+                eta
+            );
 
 
         if (
-            force > 0 &&
-            pressure > 0
+            !Number.isFinite(area) ||
+            area <= 0
         ) {
 
-            area =
-                force /
-                (
-                    pressure *
-                    efficiency
+            setWarnings([
+                'Die erforderliche Fläche konnte nicht berechnet werden.'
+            ]);
+
+            resetResults();
+
+            return;
+        }
+
+
+        /* Ausfahren */
+
+        if (
+            direction === 'push'
+        ) {
+
+            diameter =
+                Math.sqrt(
+                    4 *
+                    area /
+                    Math.PI
+                );
+        }
+
+
+        /* Einfahren */
+
+        else {
+
+            const rod =
+                num('rod');
+
+
+            if (
+                rod === null ||
+                rod <= 0
+            ) {
+
+                setWarnings([
+                    'Stangendurchmesser eingeben.'
+                ]);
+
+                resetResults();
+
+                return;
+            }
+
+
+            const rodMM =
+                toMM(
+                    rod,
+                    $('rodUnit').value
                 );
 
 
-            if (direction === "push") {
+            diameter =
+                Math.sqrt(
+                    4 *
+                    area /
+                    Math.PI +
+                    rodMM ** 2
+                );
+        }
 
-                diameter =
-                    Math.sqrt(
-                        4 *
-                        area /
-                        Math.PI
-                    );
-            }
 
+        if (
+            !Number.isFinite(diameter) ||
+            diameter <= 0
+        ) {
 
-            if (direction === "pull") {
+            setWarnings([
+                'Der erforderliche Kolbendurchmesser konnte nicht berechnet werden.'
+            ]);
 
-                const rod =
-                    toMM(
-                        value("rod"),
-                        get("rodUnit").value
-                    );
+            resetResults();
 
-                if (rod > 0) {
-
-                    diameter =
-                        Math.sqrt(
-                            4 *
-                            area /
-                            Math.PI +
-                            rod *
-                            rod
-                        );
-                }
-            }
+            return;
         }
     }
 
@@ -1657,33 +2579,26 @@ function calculate() {
 
 
     if (
-        mode === "cylinder" &&
-        diameter > 0 &&
-        pressure > 0
+        mode === 'cylinder'
     ) {
 
         showSuggestions(
             diameter,
             pressure,
-            efficiency
+            eta,
+            force
         );
 
     } else {
 
-        get("suggestions")
-            .classList.add("hidden");
+        $('suggestions')
+            .classList.add('hidden');
     }
-
-
-    checkWarnings(
-        diameter,
-        area
-    );
 }
 
 
 /* =====================================================
-   ERGEBNISSE
+   ERGEBNISDARSTELLUNG
 ===================================================== */
 
 function displayResults(
@@ -1693,85 +2608,96 @@ function displayResults(
     diameter
 ) {
 
-    if (mode === "force") {
+    if (
+        mode === 'force'
+    ) {
 
-        get("resultLabel").textContent =
-            direction === "push"
-                ? "Zylinderkraft"
-                : "Einfahrkraft";
+        $('resultLabel').textContent =
+            direction === 'push'
+                ? 'Zylinderkraft'
+                : 'Einfahrkraft';
 
-        get("resultMain").textContent =
-            force > 0
-                ? showForce(force)
-                : "–";
 
-        get("resultText").textContent =
-            "Resultierende Kraft aus Druck und wirksamer Fläche.";
+        $('resultText').textContent =
+            direction === 'push'
+                ? 'Resultierende Kraft aus Druck, Kolbenfläche und Wirkungsgrad.'
+                : 'Resultierende Einfahrkraft aus Druck, Ringfläche und Wirkungsgrad.';
     }
 
 
-    if (mode === "pressure") {
+    else if (
+        mode === 'pressure'
+    ) {
 
-        get("resultLabel").textContent =
-            "Benötigter Druck";
+        $('resultLabel').textContent =
+            'Benötigter Druck';
 
-        get("resultMain").textContent =
-            pressure > 0
-                ? showPressure(pressure)
-                : "–";
 
-        get("resultText").textContent =
-            "Erforderlicher Druck für die eingegebene Kraft.";
+        $('resultText').textContent =
+            direction === 'push'
+                ? 'Erforderlicher Druck für die gewünschte Kraft.'
+                : 'Erforderlicher Druck für die gewünschte Einfahrkraft.';
     }
 
 
-    if (mode === "cylinder") {
+    else {
 
-        get("resultLabel").textContent =
-            "Erforderlicher Kolbendurchmesser";
+        $('resultLabel').textContent =
+            'Erforderlicher Kolbendurchmesser';
 
-        get("resultMain").textContent =
-            diameter > 0
-                ? "Ø " +
-                  showDiameter(diameter)
-                : "–";
 
-        get("resultText").textContent =
-            "Theoretischer Mindestdurchmesser.";
+        $('resultText').textContent =
+            direction === 'push'
+                ? 'Theoretischer Mindestdurchmesser für die gewünschte Ausfahrkraft.'
+                : 'Theoretischer Mindestdurchmesser für die gewünschte Einfahrkraft bei gegebener Stange.';
     }
 
 
-    get("resultArea").textContent =
-        area > 0
-            ? showArea(area)
-            : "–";
+    if (
+        mode === 'cylinder'
+    ) {
+
+        $('resultMain').textContent =
+            'Ø ' +
+            showDiameter(diameter);
+
+    } else if (
+        mode === 'pressure'
+    ) {
+
+        $('resultMain').textContent =
+            showPressure(pressure);
+
+    } else {
+
+        $('resultMain').textContent =
+            showForce(force);
+    }
 
 
-    get("resultAreaNote").textContent =
-        direction === "push"
-            ? "Kolbenfläche"
-            : "Ringfläche";
+    $('resultArea').textContent =
+        showArea(area);
 
 
-    get("resultDiameter").textContent =
-        diameter > 0
-            ? showDiameter(diameter)
-            : "–";
+    $('resultAreaNote').textContent =
+        direction === 'push'
+            ? 'Kolbenfläche'
+            : 'Ringfläche';
 
 
-    get("resultPressure").textContent =
-        pressure > 0
-            ? showPressure(pressure)
-            : "–";
+    $('resultDiameter').textContent =
+        showDiameter(diameter);
 
 
-    get("resultForce").textContent =
-        force > 0
-            ? showForce(force)
-            : "–";
+    $('resultPressure').textContent =
+        showPressure(pressure);
 
 
-    get("formula").textContent =
+    $('resultForce').textContent =
+        showForce(force);
+
+
+    $('formula').textContent =
         getFormula();
 }
 
@@ -1783,10 +2709,12 @@ function displayResults(
 function showSuggestions(
     requiredDiameter,
     pressure,
-    efficiency
+    eta,
+    requiredForce
 ) {
 
     const standard = [
+
         5,
         6,
         8,
@@ -1806,80 +2734,27 @@ function showSuggestions(
         200,
         250,
         320
+
     ];
 
 
-    let firstSuitable = -1;
-
-
-    for (
-        let i = 0;
-        i < standard.length;
-        i++
-    ) {
-
-        if (
-            standard[i] >=
-            requiredDiameter
-        ) {
-
-            firstSuitable = i;
-            break;
-        }
-    }
-
-
-    let start;
-
-
-    if (firstSuitable === -1) {
-
-        start =
-            Math.max(
-                0,
-                standard.length - 6
-            );
-
-    } else {
-
-        start =
-            Math.max(
-                0,
-                firstSuitable - 2
-            );
-    }
-
-
-    const selected =
-        standard.slice(
-            start,
-            start + 6
-        );
+    let firstSufficient =
+        -1;
 
 
     const rod =
-        direction === "pull"
+        direction === 'pull'
             ? toMM(
-                value("rod"),
-                get("rodUnit").value
-              )
+                num('rod'),
+                $('rodUnit').value
+            )
             : 0;
 
 
-    const requiredForce =
-        toN(
-            value("force"),
-            get("forceUnit").value
-        );
+    const cards = [];
 
 
-    const grid =
-        get("suggestionGrid");
-
-    grid.innerHTML = "";
-
-
-    selected.forEach(
+    standard.forEach(
         diameter => {
 
             const pistonArea =
@@ -1893,8 +2768,10 @@ function showSuggestions(
                 pistonArea;
 
 
+            /* Einfahren */
+
             if (
-                direction === "pull"
+                direction === 'pull'
             ) {
 
                 if (
@@ -1905,279 +2782,743 @@ function showSuggestions(
                     effectiveArea =
                         Math.PI *
                         (
-                            diameter *
-                            diameter -
-                            rod *
-                            rod
+                            diameter ** 2 -
+                            rod ** 2
                         ) /
                         4;
 
                 } else {
 
-                    effectiveArea = 0;
+                    effectiveArea =
+                        null;
                 }
+            }
+
+
+            /* Ungültiger Zylinder */
+
+            if (
+                effectiveArea === null
+            ) {
+
+                cards.push({
+
+                    diameter,
+
+                    valid: false,
+
+                    area: null,
+
+                    force: null,
+
+                    reserve: null
+
+                });
+
+                return;
             }
 
 
             const resultingForce =
                 pressure *
                 effectiveArea *
-                efficiency;
+                eta;
 
 
-            let reserve = null;
+            const reserve =
+                (
+                    resultingForce /
+                    requiredForce -
+                    1
+                ) *
+                100;
+
+
+            const sufficient =
+                resultingForce >=
+                requiredForce;
 
 
             if (
-                requiredForce > 0 &&
-                resultingForce > 0
+                sufficient &&
+                firstSufficient === -1
             ) {
 
-                reserve =
-                    (
-                        resultingForce /
-                        requiredForce -
-                        1
-                    ) *
-                    100;
+                firstSufficient =
+                    diameter;
             }
 
+
+            cards.push({
+
+                diameter,
+
+                valid: true,
+
+                area: effectiveArea,
+
+                force: resultingForce,
+
+                reserve,
+
+                sufficient
+
+            });
+        }
+    );
+
+
+    /* ================================================
+       WARNUNGEN
+    ================================================= */
+
+    const suggestionWarnings = [];
+
+
+    if (
+        requiredDiameter > 320
+    ) {
+
+        suggestionWarnings.push(
+            'Der benötigte Durchmesser liegt über 320 mm. Es ist keine ausreichende Standardgröße in der Vorschlagsliste vorhanden.'
+        );
+    }
+
+
+    if (
+        firstSufficient === -1 &&
+        requiredDiameter <= 320
+    ) {
+
+        suggestionWarnings.push(
+            'Keine der dargestellten Standardgrößen erreicht die benötigte Kraft.'
+        );
+    }
+
+
+    if (
+        direction === 'pull' &&
+        rod >= 320
+    ) {
+
+        suggestionWarnings.push(
+            'Bei diesem Stangendurchmesser sind die Standardgrößen bis 320 mm nicht als gültige Einfahrzylinder nutzbar.'
+        );
+    }
+
+
+    const existingWarnings =
+        getCurrentWarnings();
+
+
+    setWarnings([
+        ...existingWarnings,
+        ...suggestionWarnings
+    ]);
+
+
+    /* ================================================
+       AUSWAHL DER ANGEZEIGTEN GRÖSSEN
+    ================================================= */
+
+    let center = -1;
+
+
+    if (
+        firstSufficient !== -1
+    ) {
+
+        center =
+            standard.indexOf(
+                firstSufficient
+            );
+
+    } else {
+
+        center =
+            standard.findIndex(
+                d =>
+                    d >=
+                    requiredDiameter
+            );
+
+
+        if (
+            center < 0
+        ) {
+
+            center =
+                standard.length - 1;
+        }
+    }
+
+
+    const start =
+        Math.max(
+            0,
+            Math.min(
+                standard.length - 6,
+                center - 2
+            )
+        );
+
+
+    const selected =
+        cards.slice(
+            start,
+            start + 6
+        );
+
+
+    const grid =
+        $('suggestionGrid');
+
+
+    grid.innerHTML =
+        '';
+
+
+    /* ================================================
+       KARTEN
+    ================================================= */
+
+    selected.forEach(
+        card => {
 
             const div =
                 document.createElement(
-                    "div"
+                    'div'
                 );
+
+
+            const recommended =
+                card.valid &&
+                card.diameter ===
+                firstSufficient;
 
 
             div.className =
-                "suggestion " +
+                'suggestion' +
                 (
-                    diameter >=
-                    requiredDiameter
-                        ? "recommended"
-                        : ""
+                    recommended
+                        ? ' recommended'
+                        : ''
+                ) +
+                (
+                    !card.valid
+                        ? ' invalid'
+                        : ''
                 );
 
 
-            let forceClass =
-                "insufficient";
+            let forceText;
+            let forceClass;
 
 
             if (
-                resultingForce >=
-                requiredForce
+                card.valid
             ) {
 
+                forceText =
+                    showForce(
+                        card.force
+                    );
+
+
                 forceClass =
-                    "sufficient";
+                    card.sufficient
+                        ? 'sufficient'
+                        : 'insufficient';
+
+            } else {
+
+                forceText =
+                    'ungültig';
+
+
+                forceClass =
+                    'invalid';
             }
 
 
-            let reserveText = "";
+            let areaText;
 
 
             if (
-                reserve !== null
+                card.valid
+            ) {
+
+                areaText =
+                    showArea(
+                        card.area
+                    );
+
+            } else {
+
+                areaText =
+                    'Stange ≥ Ø';
+            }
+
+
+            let reserveText =
+                '';
+
+
+            if (
+                card.valid
             ) {
 
                 reserveText =
                     (
-                        reserve >= 0
-                            ? "+"
-                            : ""
+                        card.reserve >= 0
+                            ? '+'
+                            : ''
                     ) +
                     formatNumber(
-                        reserve,
+                        card.reserve,
                         0
                     ) +
-                    " %";
+                    ' %';
             }
 
 
             div.innerHTML =
 
-                "<div class='diameter'>" +
-                    "Ø " +
-                    diameter +
-                    " mm" +
-                "</div>" +
+                '<div class="diameter">' +
+                    'Ø ' +
+                    card.diameter +
+                    ' mm' +
+                    (
+                        recommended
+                            ? ' ✓'
+                            : ''
+                    ) +
+                '</div>' +
 
-                "<div class='force " +
+                '<div class="force ' +
                     forceClass +
-                    "'>" +
+                    '">' +
+                    forceText +
+                '</div>' +
 
-                    (
-                        effectiveArea > 0
-                            ? showForce(
-                                resultingForce
-                              )
-                            : "nicht möglich"
-                    ) +
+                '<div class="area">' +
+                    areaText +
+                '</div>' +
 
-                "</div>" +
-
-                "<div class='area'>" +
-
-                    (
-                        effectiveArea > 0
-                            ? showArea(
-                                effectiveArea
-                              )
-                            : ""
-                    ) +
-
-                "</div>" +
-
-                "<div class='reserve'>" +
+                '<div class="reserve">' +
                     reserveText +
-                "</div>";
+                '</div>';
 
 
-            grid.appendChild(div);
+            grid.appendChild(
+                div
+            );
         }
     );
 
 
-    get("suggestions")
-        .classList.remove("hidden");
+    $('suggestions')
+        .classList.remove('hidden');
 }
 
 
 /* =====================================================
-   FORMEL
+   FORMELN
+
+   Wirkungsgrad η ist in jeder Formel enthalten.
 ===================================================== */
 
 function getFormula() {
 
-    if (mode === "force") {
-
-        if (direction === "push")
-            return "F = p · A";
-
-        return "F = p · π · (D² − d²) / 4";
-    }
-
-
-    if (mode === "pressure") {
-
-        if (direction === "push")
-            return "p = F / A";
-
-        return "p = F / [π · (D² − d²) / 4]";
-    }
-
-
-    if (mode === "cylinder") {
-
-        if (direction === "push")
-            return "A = F / p  |  D = √(4A / π)";
-
-        return "A = F / p  |  D = √(4A / π + d²)";
-    }
-
-
-    return "";
-}
-
-
-/* =====================================================
-   WARNUNGEN
-===================================================== */
-
-function checkWarnings(
-    diameter,
-    area
-) {
-
-    const warning =
-        get("warning");
-
-
-    warning.style.display =
-        "none";
-
-    warning.textContent =
-        "";
+    const eta =
+        'η';
 
 
     if (
-        direction === "pull"
+        mode === 'force'
     ) {
 
-        const rod =
-            toMM(
-                value("rod"),
-                get("rodUnit").value
-            );
-
-
-        if (rod <= 0) {
-
-            warning.style.display =
-                "block";
-
-            warning.textContent =
-                "Stangendurchmesser erforderlich.";
-
-            return;
-        }
-
-
         if (
-            diameter > 0 &&
-            rod >= diameter
+            direction === 'push'
         ) {
 
-            warning.style.display =
-                "block";
-
-            warning.textContent =
-                "Stangendurchmesser muss kleiner als der Kolbendurchmesser sein.";
-
-            return;
+            return (
+                'F = p · A · ' +
+                eta
+            );
         }
+
+
+        return (
+            'F = p · π · ' +
+            '(D² − d²) / 4 · ' +
+            eta
+        );
     }
+
+
+    if (
+        mode === 'pressure'
+    ) {
+
+        if (
+            direction === 'push'
+        ) {
+
+            return (
+                'p = F / (A · ' +
+                eta +
+                ')'
+            );
+        }
+
+
+        return (
+            'p = F / [π · ' +
+            '(D² − d²) / 4 · ' +
+            eta +
+            ']'
+        );
+    }
+
+
+    if (
+        mode === 'cylinder'
+    ) {
+
+        if (
+            direction === 'push'
+        ) {
+
+            return (
+                'A = F / (p · ' +
+                eta +
+                ')  |  ' +
+                'D = √(4A / π)'
+            );
+        }
+
+
+        return (
+            'A = F / (p · ' +
+            eta +
+            ')  |  ' +
+            'D = √(4A / π + d²)'
+        );
+    }
+
+
+    return '';
 }
 
 
 /* =====================================================
-   EVENTS
+   OBERFLÄCHE AKTUALISIEREN
+===================================================== */
+
+function updateInterface() {
+
+    /* Kraftfeld */
+
+    $('forceBox')
+        .classList.toggle(
+            'hidden',
+            mode === 'force'
+        );
+
+
+    /* Druckfeld */
+
+    $('pressureBox')
+        .classList.toggle(
+            'hidden',
+            mode === 'pressure'
+        );
+
+
+    const cylinderMode =
+        mode === 'cylinder';
+
+
+    /* Zylindergröße */
+
+    $('existingCylinder')
+        .classList.toggle(
+            'hidden',
+            cylinderMode &&
+            direction === 'push'
+        );
+
+
+    /*
+       Bei Zylinderberechnung wird
+       keine vorhandene Zylindergröße
+       eingegeben.
+    */
+
+    $('sizeControls')
+        .classList.toggle(
+            'hidden',
+            cylinderMode
+        );
+
+
+    /*
+       Stangendurchmesser nur bei
+       Einfahren.
+    */
+
+    $('rodField')
+        .classList.toggle(
+            'hidden',
+            direction !== 'pull'
+        );
+
+
+    /* Beschriftungen */
+
+    $('cylinderComment')
+        .textContent =
+            cylinderMode
+                ? 'Zusätzliche Eingabe'
+                : 'Vorhandener Zylinder';
+
+
+    $('forceTitle')
+        .textContent =
+            cylinderMode
+                ? 'Benötigte Kraft'
+                : 'Kraft';
+
+
+    $('forceComment')
+        .textContent =
+            mode === 'pressure' ||
+            cylinderMode
+                ? 'Eingabe'
+                : 'Ausgabe';
+
+
+    $('pressureTitle')
+        .textContent =
+            cylinderMode
+                ? 'Benötigter Druck'
+                : 'Druck';
+
+
+    $('pressureComment')
+        .textContent =
+            mode === 'force' ||
+            cylinderMode
+                ? 'Eingabe'
+                : 'Ausgabe';
+
+
+    /* Hinweise */
+
+    if (
+        mode === 'force'
+    ) {
+
+        $('hint').textContent =
+            direction === 'push'
+                ? 'Druck und Zylindergröße eingeben.'
+                : 'Druck, Zylindergröße und Stangendurchmesser eingeben.';
+    }
+
+
+    if (
+        mode === 'pressure'
+    ) {
+
+        $('hint').textContent =
+            direction === 'push'
+                ? 'Benötigte Kraft und Zylindergröße eingeben.'
+                : 'Benötigte Kraft, Zylindergröße und Stangendurchmesser eingeben.';
+    }
+
+
+    if (
+        mode === 'cylinder'
+    ) {
+
+        $('hint').textContent =
+            direction === 'push'
+                ? 'Benötigte Kraft und Druck eingeben. Der Zylinderdurchmesser wird bestimmt.'
+                : 'Benötigte Kraft, Druck und Stangendurchmesser eingeben. Der Zylinderdurchmesser wird bestimmt.';
+    }
+
+
+    $('formula').textContent =
+        getFormula();
+}
+
+
+/* =====================================================
+   ZAHLENFELDER
+
+   Nur input, keine zusätzliche change-Berechnung.
 ===================================================== */
 
 [
-    "force",
-    "pressure",
-    "diameter",
-    "area",
-    "rod",
-    "efficiency",
-    "forceUnit",
-    "pressureUnit",
-    "diameterUnit",
-    "areaUnit",
-    "rodUnit"
+    'force',
+    'pressure',
+    'diameter',
+    'area',
+    'rod',
+    'efficiency'
 ]
 .forEach(
     id => {
 
-        get(id).addEventListener(
-            "input",
-            calculate
-        );
+        $(id)
+            .addEventListener(
+                'input',
+                () => {
 
-        get(id).addEventListener(
-            "change",
-            calculate
-        );
+                    sanitizeNumber(id);
+
+                    calculate();
+                }
+            );
     }
 );
 
 
 /* =====================================================
-   START
+   EINHEITEN
+
+   Nur change.
 ===================================================== */
 
+$('forceUnit')
+    .addEventListener(
+        'change',
+        () =>
+            handleUnitChange(
+                'forceUnit',
+                toN,
+                fromN
+            )
+    );
+
+
+$('pressureUnit')
+    .addEventListener(
+        'change',
+        () =>
+            handleUnitChange(
+                'pressureUnit',
+                toNmm2,
+                fromNmm2
+            )
+    );
+
+
+$('diameterUnit')
+    .addEventListener(
+        'change',
+        () =>
+            handleUnitChange(
+                'diameterUnit',
+                toMM,
+                fromMM
+            )
+    );
+
+
+$('areaUnit')
+    .addEventListener(
+        'change',
+        () =>
+            handleUnitChange(
+                'areaUnit',
+                toMM2,
+                fromMM2
+            )
+    );
+
+
+$('rodUnit')
+    .addEventListener(
+        'change',
+        () =>
+            handleUnitChange(
+                'rodUnit',
+                toMM,
+                fromMM
+            )
+    );
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+$('btnForce')
+    .addEventListener(
+        'click',
+        () =>
+            changeMode('force')
+    );
+
+
+$('btnPressure')
+    .addEventListener(
+        'click',
+        () =>
+            changeMode('pressure')
+    );
+
+
+$('btnCylinder')
+    .addEventListener(
+        'click',
+        () =>
+            changeMode('cylinder')
+    );
+
+
+$('btnPush')
+    .addEventListener(
+        'click',
+        () =>
+            changeDirection('push')
+    );
+
+
+$('btnPull')
+    .addEventListener(
+        'click',
+        () =>
+            changeDirection('pull')
+    );
+
+
+$('btnDiameter')
+    .addEventListener(
+        'click',
+        () =>
+            changeSizeInput('diameter')
+    );
+
+
+$('btnArea')
+    .addEventListener(
+        'click',
+        () =>
+            changeSizeInput('area')
+    );
+
+
+/* =====================================================
+   INITIALISIERUNG
+===================================================== */
+
+updateButtons();
+
 updateInterface();
+
 calculate();
 
 </script>
